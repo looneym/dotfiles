@@ -1,0 +1,25 @@
+#!/usr/local/bin/ruby 
+
+require 'erb'
+
+# Gather variables from the environment
+current_dir_name = File.basename(Dir.getwd)
+out_file = "#{Dir.pwd}/.tmuxinator.yml"
+
+# Variables used in the template
+name = current_dir_name
+root = "~/#{current_dir_name}"
+
+# Open the template and prepare it for rendering
+erb_file = "#{Dir.home}/dotfiles/assets/tmuxinator_template.yml"
+erb_str = File.read(erb_file)
+
+# Render the template and generate the file 
+renderer = ERB.new(erb_str)
+result = renderer.result()
+File.open(out_file, 'w') do |f|
+  f.write(result)
+end  
+
+exec "vim .tmuxinator.yml"
+     

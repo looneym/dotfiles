@@ -31,7 +31,10 @@ source ~/.transient
 
 # ENV variables
 export DEFAULT_USER='looneym'
-alias tt="tmuxinator"
+alias mux="tmuxinator"
+# start tmuxinator sesion using .tmuxinator.yml file in `pwd` if one exists
+# see also bin/muxinit to create such a file
+alias muxup="tmuxinator start foo" 
 # Use more current version of Vim from Homebrew
 alias vim='/usr/local/Cellar/vim/8.0.1350/bin/vim'
 # manipulate dotfiles
