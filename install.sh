@@ -13,7 +13,7 @@ if [ ! -e "$transient" ] ; then
 fi
 echo "...done"
 
-# Pull down each vim plugin from source
+# Pull down latest version of Vundle from source
 git submodule init
 git submodule update
 
