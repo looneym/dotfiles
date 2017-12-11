@@ -21,5 +21,6 @@ File.open(out_file, 'w') do |f|
   f.write(result)
 end  
 
+`ln -f .tmuxinator.yml #{Dir.home}/.config/tmuxinator/#{current_dir_name}.yml`
 exec "vim .tmuxinator.yml"
      
