@@ -9,6 +9,7 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'scrooloose/nerdtree'
+Plugin 'junegunn/fzf.vim'
 call vundle#end()     
 filetype plugin indent on 
 
@@ -41,7 +42,7 @@ map <C-n> :NERDTreeToggle<CR>
 nnoremap ^ $ 
 nnoremap $ ^ <left>
 nnoremap & # 
-nnoremap P : FZF ~ <ENTER>
+nnoremap F : Files <ENTER> 
 " cycle between split panes
 nnoremap - <c-w>W
 nnoremap = <c-w>w
