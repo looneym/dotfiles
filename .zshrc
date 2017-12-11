@@ -17,7 +17,7 @@ plugins=(git)
 #export PATH=$HOME/.pilot/shims:$HOME/.pilot/bin:$PATH
 #eval $(pilot env)
 
-
+export EDITOR='vim'
 source $ZSH/oh-my-zsh.sh
 
 ################################################################################
