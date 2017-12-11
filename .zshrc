@@ -16,7 +16,7 @@ plugins=(git)
 # pilot is magic
 #export PATH=$HOME/.pilot/shims:$HOME/.pilot/bin:$PATH
 #eval $(pilot env)
-
+export PATH=$PATH:~/dotfiles/bin
 export EDITOR='vim'
 source $ZSH/oh-my-zsh.sh
 
@@ -31,7 +31,7 @@ source ~/.transient
 
 # ENV variables
 export DEFAULT_USER='looneym'
-
+alias tt="tmuxinator"
 # Use more current version of Vim from Homebrew
 alias vim='/usr/local/Cellar/vim/8.0.1350/bin/vim'
 # manipulate dotfiles
