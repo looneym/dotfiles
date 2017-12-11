@@ -33,8 +33,17 @@ source ~/.transient
 export DEFAULT_USER='looneym'
 alias muxc="cd ~/.config/tmuxinator/"
 alias mux="tmuxinator"
-# Use more current version of Vim from Homebrew
-alias vim='/usr/local/Cellar/vim/8.0.1350/bin/vim'
+
+# Set correct vim version based on OS version
+osx_version=$(defaults read loginwindow SystemVersionStampAsString)
+function version_gt() { test "$(printf '%s\n' "$@" | sort  | head -n 1)" != "$1"; }
+yosemite=10.10.5
+if version_gt $osx_version $yosemite; then
+  alias vim='/usr/local/Cellar/vim/8.0.1350/bin/vim' 
+else
+  alias vim='/Applications/MacVim.app/Contents/MacOS/Vim'
+fi
+    
 # manipulate dotfiles
 alias tedit='vim ~/.transient' 
 alias zedit='vi ~/.zshrc'
