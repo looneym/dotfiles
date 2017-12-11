@@ -31,6 +31,7 @@ source ~/.transient
 
 # ENV variables
 export DEFAULT_USER='looneym'
+alias muxc="cd ~/.config/tmuxinator/"
 alias mux="tmuxinator"
 # Use more current version of Vim from Homebrew
 alias vim='/usr/local/Cellar/vim/8.0.1350/bin/vim'
