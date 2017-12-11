@@ -10,6 +10,7 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'junegunn/fzf.vim'
+Plugin 'tpope/vim-commentary'
 call vundle#end()     
 filetype plugin indent on 
 
