@@ -13,7 +13,8 @@ if [ ! -e "$transient" ] ; then
 fi
 echo "...done"
 
-ln  ~/dotfiles/looneym_custom_cobalt2.zsh-theme looneym_custom_cobalt2.zsh-theme
+
+ln ~/dotfiles/looneym_custom_cobalt2.zsh-theme  ~/.oh-my-zsh/themes/looneym_custom_cobalt2.zsh-theme
 
 # Pull down latest version of Vundle from source
 git submodule init

@@ -106,7 +106,7 @@ prompt_status() {
 
 prompt_tmuxinator() {
   if [[ -a .tmuxinator.yml ]]; then
-    echo -n " 🖥 "
+    echo -n " 💻 "
   fi
 }
 
