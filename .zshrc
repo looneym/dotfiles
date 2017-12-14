@@ -8,7 +8,7 @@
 #export PATH="/usr/bin:/bin:/usr/sbin:/sbin:$PATH"
 #PATH=$PATH:/usr/local/bin/; export PATH
 export ZSH=~/.oh-my-zsh
-ZSH_THEME="cobalt2"
+ZSH_THEME="looneym"
 export TERM=linux
 plugins=(git)
 #export NVM_DIR="/Users/$USER/.nvm"
