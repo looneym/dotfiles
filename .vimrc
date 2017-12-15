@@ -19,6 +19,10 @@ set number
 syntax enable
 set ruler
 
+" Quickly edit/reload this configuration file
+nnoremap ged :e $MYVIMRC<CR>
+nnoremap gsr :so $MYVIMRC<CR>
+
 " clipboard register uses system clipboard
 set clipboard=unnamed
 
@@ -50,3 +54,14 @@ nnoremap = <c-w>w
 " cycle between tabs
 nnoremap _ :tabp <ENTER>
 nnoremap + :tabn <ENTER>
+
+autocmd InsertEnter * highlight CursorLine guifg=white guibg=blue ctermfg=white ctermbg=blue
+autocmd InsertLeave * highlight CursorLine guifg=white guibg=darkblue ctermfg=white ctermbg=darkblue
+
+:autocmd InsertEnter * set cul
+:autocmd InsertLeave * set nocul
+
+highlight DiffAdd    cterm=bold ctermfg=10 ctermbg=17 gui=none guifg=bg guibg=Red
+highlight DiffDelete cterm=bold ctermfg=10 ctermbg=17 gui=none guifg=bg guibg=Red
+highlight DiffChange cterm=bold ctermfg=10 ctermbg=17 gui=none guifg=bg guibg=Red
+highlight DiffText   cterm=bold ctermfg=10 ctermbg=88 gui=none guifg=bg guibg=Red
