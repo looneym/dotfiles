@@ -8,9 +8,9 @@
 #export PATH="/usr/bin:/bin:/usr/sbin:/sbin:$PATH"
 #PATH=$PATH:/usr/local/bin/; export PATH
 export ZSH=~/.oh-my-zsh
-ZSH_THEME="looneym_custom_cobalt2"
+ZSH_THEME="looneym"
 # ZSH_THEME="cobalt2"
-export TERM=linux
+export TERM=xterm-256color
 plugins=(git)
 #export NVM_DIR="/Users/$USER/.nvm"
 #[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
