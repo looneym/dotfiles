@@ -25,6 +25,10 @@ let g:airline_powerline_fonts = 1
 " find and replace all isntances of word under cursor
 :nnoremap <Leader>s :%s/\<<C-r><C-w>\>/
 
+" split panes easily
+:nnoremap <Leader>v :vnew<CR>
+:nnoremap <Leader>h :new<CR>
+
 " fuzzy finder plugin connfig 
 let $FZF_DEFAULT_COMMAND='find . '
 nnoremap F : Files <ENTER> 
