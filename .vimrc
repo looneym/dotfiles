@@ -25,6 +25,10 @@ let g:airline_powerline_fonts = 1
 " find and replace all isntances of word under cursor
 :nnoremap <Leader>s :%s/\<<C-r><C-w>\>/
 
+" fuzzy finder plugin connfig 
+let $FZF_DEFAULT_COMMAND='find . '
+nnoremap F : Files <ENTER> 
+
 " visual aids for programming
 set number
 syntax enable
@@ -58,7 +62,6 @@ map <C-n> :NERDTreeToggle<CR>
 nnoremap ^ $ 
 nnoremap $ ^ <left>
 nnoremap & # 
-nnoremap F : Files <ENTER> 
 " cycle between split panes
 nnoremap - <c-w>W
 nnoremap = <c-w>w
