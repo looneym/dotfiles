@@ -34,6 +34,7 @@ source ~/.transient
 export DEFAULT_USER='looneym'
 alias muxc="cd ~/.config/tmuxinator/"
 alias mux="tmuxinator"
+export TMUXINATOR_CONFIG=$HOME/dotfiles/tmuxinator
 
 # Set correct vim version based on OS version
 osx_version=$(defaults read loginwindow SystemVersionStampAsString)
