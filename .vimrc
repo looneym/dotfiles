@@ -3,6 +3,7 @@ filetype off
 set nocompatible  
 set commentstring=#\ %s
 set mouse=a
+set noswapfile
 
 " Plugin management 
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -11,8 +12,14 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'junegunn/fzf.vim'
 Plugin 'tpope/vim-commentary'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 call vundle#end()     
 filetype plugin indent on 
+
+let g:airline_theme='cobalt2'
+let g:airline_powerline_fonts = 1
+
 
 " visual aids for programming
 set number
@@ -58,7 +65,7 @@ nnoremap + :tabn <ENTER>
 autocmd InsertEnter * highlight CursorLine guifg=white guibg=blue ctermfg=white ctermbg=blue
 autocmd InsertLeave * highlight CursorLine guifg=white guibg=darkblue ctermfg=white ctermbg=darkblue
 
-:autocmd InsertEnter * set cul
+":autocmd InsertEnter * set cul
 :autocmd InsertLeave * set nocul
 
 highlight DiffAdd    cterm=bold ctermfg=10 ctermbg=17 gui=none guifg=bg guibg=Red
