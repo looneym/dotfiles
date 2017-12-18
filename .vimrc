@@ -14,6 +14,7 @@ Plugin 'junegunn/fzf.vim'
 Plugin 'tpope/vim-commentary'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
+Plugin 'Valloric/YouCompleteMe'
 Plugin 'tpope/vim-fugitive'
 call vundle#end()     
 filetype plugin indent on 
@@ -21,6 +22,8 @@ filetype plugin indent on
 let g:airline_theme='cobalt2'
 let g:airline_powerline_fonts = 1
 
+" find and replace all isntances of word under cursor
+:nnoremap <Leader>s :%s/\<<C-r><C-w>\>/
 
 " visual aids for programming
 set number
