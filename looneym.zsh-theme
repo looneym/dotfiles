@@ -115,7 +115,6 @@ build_prompt() {
   RETVAL=$?
   prompt_status
   prompt_dir
-  prompt_tmuxinator
   prompt_git
   prompt_end
 }
