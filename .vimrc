@@ -16,11 +16,18 @@ Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'tpope/vim-fugitive'
+Plugin 'ludovicchabant/vim-gutentags'
+Plugin 'metakirby5/codi.vim'
 call vundle#end()     
 filetype plugin indent on 
 
 let g:airline_theme='cobalt2'
 let g:airline_powerline_fonts = 1
+
+" delete without saving to clipboard
+nnoremap <leader>d "_d
+vnoremap <leader>d "_d
+vnoremap <leader>p "_dP
 
 " find and replace all isntances of word under cursor
 :nnoremap <Leader>s :%s/\<<C-r><C-w>\>/
@@ -28,6 +35,14 @@ let g:airline_powerline_fonts = 1
 " split panes easily
 :nnoremap <Leader>v :vnew<CR>
 :nnoremap <Leader>h :new<CR>
+
+" new tab
+:nnoremap <Leader>t :tabnew<CR>
+:nnoremap <Leader>T :tabclose!<CR>
+
+:nnoremap <Leader>r :e!<CR>
+
+let g:ycm_autoclose_preview_window_after_completion=1
 
 " fuzzy finder plugin connfig 
 let $FZF_DEFAULT_COMMAND='find . '
