@@ -54,6 +54,8 @@ alias vedit='vim ~/.vimrc'
 alias vsource='source ~/.vimrc'
 alias scratchpad="vim ~/.scratchpad.txt"
 alias aedit="subl ~/.aws "
+alias dotl="mux start dotfiles_l"
+alias dotd="mux start dotfiles_d"
 # misc utilities
 alias venvup='source venv/bin/activate'
 alias venvinit='virtualenv venv && source venv/bin/activate'
