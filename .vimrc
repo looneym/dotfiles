@@ -18,6 +18,9 @@ Plugin 'Valloric/YouCompleteMe'
 Plugin 'tpope/vim-fugitive'
 Plugin 'ludovicchabant/vim-gutentags'
 Plugin 'metakirby5/codi.vim'
+Plugin 'dsawardekar/ember.vim'
+Plugin 'dsawardekar/portkey'
+Plugin 'tpope/vim-rails'
 call vundle#end()     
 filetype plugin indent on 
 
@@ -49,13 +52,18 @@ let $FZF_DEFAULT_COMMAND='find . '
 nnoremap F : Files <ENTER> 
 
 " visual aids for programming
-set number
 syntax enable
 set ruler
 
 " Quickly edit/reload this configuration file
 nnoremap ged :e $MYVIMRC<CR>
 nnoremap gsr :so $MYVIMRC<CR>
+
+"" Quickly resize split panes
+noremap vu :vertical resize +5<CR>
+noremap vd :vertical resize -5<CR>
+noremap hu :resize +5<CR>
+noremap hd :resize -5<CR>
 
 " clipboard register uses system clipboard
 set clipboard=unnamed
@@ -83,7 +91,9 @@ nnoremap $ ^ <left>
 nnoremap & # 
 " cycle between split panes
 nnoremap - <c-w>W
+nnoremap H <c-w>W
 nnoremap = <c-w>w
+nnoremap L <c-w>w
 " cycle between tabs
 nnoremap _ :tabp <ENTER>
 nnoremap + :tabn <ENTER>
