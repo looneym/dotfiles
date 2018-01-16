@@ -1,6 +1,6 @@
 dir=~/dotfiles                    
 files=".zshrc .vimrc .vim .tmux.conf"       
-transient="$HOME/.transient"
+transient="$HOME/.transient.zshrc"
 
 for file in $files; do
     echo "Creating symlink to $file in home directory."
