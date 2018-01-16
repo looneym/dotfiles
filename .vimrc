@@ -18,12 +18,14 @@ Plugin 'Valloric/YouCompleteMe'
 Plugin 'tpope/vim-fugitive'
 Plugin 'ludovicchabant/vim-gutentags'
 Plugin 'metakirby5/codi.vim'
+Plugin 'mustache/vim-mustache-handlebars'
+Plugin 'lfv89/vim-interestingwords'
 call vundle#end()     
 filetype plugin indent on 
 
 let g:airline_theme='cobalt2'
 let g:airline_powerline_fonts = 1
-
+set filetype=hbs syntax=mustache 
 " delete without saving to clipboard
 nnoremap <leader>d "_d
 vnoremap <leader>d "_d
