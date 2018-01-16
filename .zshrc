@@ -54,6 +54,8 @@ alias vedit='vim ~/.vimrc'
 alias vsource='source ~/.vimrc'
 alias scratchpad="vim ~/.scratchpad.txt"
 alias aedit="subl ~/.aws "
+alias dotl="mux start dotfiles_l"
+alias dotd="mux start dotfiles_d"
 # misc utilities
 alias venvup='source venv/bin/activate'
 alias venvinit='virtualenv venv && source venv/bin/activate'
@@ -65,6 +67,8 @@ alias gattify='cd /Users/Micheal/cse-tools/js-test-app && sudo python -m SimpleH
 #alias gattify='cd /Users/Micheal/cse-tools/js-test-app && subl . && sudo python -m SimpleHTTPServer 80'
 alias s='subl -a .'                
 alias pewpew=' hammer console production || hammer cert'
+alias myip='curl ipinfo.io/ip'
+
 #export PATH=/usr/'local/bin:/Users/looneym/.rvm/gems/ruby-2.4.0/bin:/Users/looneym/.rvm/gems/ruby-2.4.0@global/bin:/Users/looneym/.rvm/rubies/ruby-2.4.0/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/looneym/.rvm/bin:
 
 # tabtab source for serverless package

@@ -1,7 +1,7 @@
-# ~/.tmuxinator/dotfiles.yml
+# ~/.tmuxinator/watson.yml
 
-name: dotfiles
-root: ~/dotfiles
+name: watson
+root: ~/watson
 
 # Optional tmux socket
 # socket_name: foo
@@ -22,7 +22,7 @@ root: ~/dotfiles
 # on_project_stop: command
 
 # Runs in each window and pane before window/pane specific commands. Useful for setting up interpreter versions.
-# pre_window: rbenv shell 2.0.0-p247
+pre_window: source venv/bin/activate
 
 # Pass command line options to tmux. Useful for specifying a different tmux.conf.
 # tmux_options: -f ~/.tmux.mac.conf
@@ -40,14 +40,12 @@ root: ~/dotfiles
 # attach: false
 
 # Runs after everything. Use it to attach to tmux with custom options etc.
-# post: tmux -CC attach -t dotfiles
+# post: tmux -CC attach -t watson
 
 windows:
-  - editor:
+  - editor: vim -c "NERDTreeToggle" 
+  - server: 
       layout: main-vertical
-      # Synchronize all panes of this window, can be enabled before or after the pane commands run.
-      # 'before' represents legacy functionality and will be deprecated in a future release, in favour of 'after'
-      # synchronize: after
       panes:
-        - vim -c "NERDTreeToggle"
-        -
+        - python run.py
+        - 
