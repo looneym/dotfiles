@@ -15,8 +15,8 @@ plugins=(git)
 #export NVM_DIR="/Users/$USER/.nvm"
 #[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 # pilot is magic
-#export PATH=$HOME/.pilot/shims:$HOME/.pilot/bin:$PATH
-#eval $(pilot env)
+export PATH=$HOME/.pilot/shims:$HOME/.pilot/bin:$PATH
+eval $(pilot env)
 export PATH=$PATH:~/dotfiles/bin
 export EDITOR='vim'
 source $ZSH/oh-my-zsh.sh
@@ -26,6 +26,10 @@ source $ZSH/oh-my-zsh.sh
 #  personal configs
 #
 ################################################################################
+
+function set_iterm_profile() {
+    echo -e "\033]50;SetProfile=$1\a"
+  }
 
 # load secrets
 source ~/.transient
@@ -48,7 +52,7 @@ fi
     
 # manipulate dotfiles
 alias tedit='vim ~/.transient' 
-alias zedit='vi ~/.zshrc'
+alias zedit='vim ~/.zshrc'
 alias zsource='source ~/.zshrc'
 alias vedit='vim ~/.vimrc'
 alias vsource='source ~/.vimrc'
@@ -63,10 +67,10 @@ alias lsdir='ls -d */'
 alias procfind="ps ax | grep $1"
 alias pysrv='python -m SimpleHTTPServer'
 alias dirfind="find $1 -maxdepth 1 -type d -name $2 -print -quit"
-alias gattify='cd /Users/Micheal/cse-tools/js-test-app && sudo python -m SimpleHTTPServer 80'
+alias gattify='cd /Users/Micheal/cse-tools/js-test-app && sudo python -m SimpleHTTPServer 5757'
 #alias gattify='cd /Users/Micheal/cse-tools/js-test-app && subl . && sudo python -m SimpleHTTPServer 80'
 alias s='subl -a .'                
-alias pewpew=' hammer console production || hammer cert'
+alias pewpew='set_iterm_profile Production ; hammer console production || hammer cert'
 #export PATH=/usr/'local/bin:/Users/looneym/.rvm/gems/ruby-2.4.0/bin:/Users/looneym/.rvm/gems/ruby-2.4.0@global/bin:/Users/looneym/.rvm/rubies/ruby-2.4.0/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/looneym/.rvm/bin:
 
 # tabtab source for serverless package
@@ -80,3 +84,6 @@ export NVM_DIR="/Users/Micheal/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 
 export PATH="$HOME/.yarn/bin:$PATH"
+export INTERCOM_USER=micheal.looney
+eval "$(rbenv init -)"
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
