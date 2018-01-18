@@ -23,6 +23,7 @@ Plugin 'tpope/vim-rails'
 Plugin 'ruanyl/vim-gh-line'
 Plugin 'jeetsukumaran/vim-buffergator'
 Plugin 'thiagoalessio/rainbow_levels.vim'
+Plugin 'airblade/vim-gitgutter'
 call vundle#end()     
 filetype plugin indent on 
 
