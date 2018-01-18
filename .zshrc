@@ -5,10 +5,10 @@
 ################################################################################
 
 export ZSH=~/.oh-my-zsh
+ZSH_THEME="cobalt2"
 source $ZSH/oh-my-zsh.sh
 plugins=(git)
 export TERM=xterm-256color
-ZSH_THEME="looneym"
 
 ################################################################################
 #
@@ -60,4 +60,4 @@ alias procfind="ps ax | grep $1"
 alias pysrv='python -m SimpleHTTPServer'
 alias dirfind="find $1 -maxdepth 1 -type d -name $2 -print -quit"
 alias myip='curl ipinfo.io/ip'
-
+alias gp="git push origin `git branch | grep \* | cut -d ' ' -f2`"
