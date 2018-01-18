@@ -1,1 +1,0 @@
-resize-pane -Z ; select-pane -t :.- ; resize-pane -Z
