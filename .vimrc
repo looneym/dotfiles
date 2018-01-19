@@ -24,6 +24,7 @@ Plugin 'ruanyl/vim-gh-line'
 Plugin 'jeetsukumaran/vim-buffergator'
 Plugin 'thiagoalessio/rainbow_levels.vim'
 Plugin 'airblade/vim-gitgutter'
+Plugin 'majutsushi/tagbar'
 call vundle#end()     
 filetype plugin indent on 
 
