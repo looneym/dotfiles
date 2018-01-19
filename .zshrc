@@ -64,7 +64,6 @@ function pr_and_review() {
  fi
   git push origin `git branch | grep \* | cut -d ' ' -f2`
   vim /tmp/hub_pr_message.txt < `tty` > `tty`
-  ech
   hub pull-request -F - < /tmp/hub_pr_message.txt > /tmp/hub_pr_url.txt
   read -r pr_title</tmp/hub_pr_message.txt
   pull-to-slack $channel  ":pr: ${pr_title} `cat /tmp/hub_pr_url.txt`"
