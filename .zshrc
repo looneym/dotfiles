@@ -54,6 +54,24 @@ alias vedit='vim ~/.vimrc'
 alias vsource='source ~/.vimrc'
 
 # misc utilities
+
+function pr_and_review() {
+  if [ "$2" == "" ]
+  then
+    channel='team-respond-eng'
+  else
+   channel=$2   
+ fi
+  git push origin `git branch | grep \* | cut -d ' ' -f2`
+  vim /tmp/hub_pr_message.txt < `tty` > `tty`
+  ech
+  hub pull-request -F - < /tmp/hub_pr_message.txt > /tmp/hub_pr_url.txt
+  read -r pr_title</tmp/hub_pr_message.txt
+  pull-to-slack $channel  ":pr: ${pr_title} `cat /tmp/hub_pr_url.txt`"
+  rm /tmp/hub_pr_url.txt
+  rm /tmp/hub_pr_message.txt
+}
+
 alias venvup='source venv/bin/activate'
 alias venvinit='virtualenv venv && source venv/bin/activate'
 alias lsdir='ls -d */'
@@ -62,4 +80,6 @@ alias pysrv='python -m SimpleHTTPServer'
 alias dirfind="find $1 -maxdepth 1 -type d -name $2 -print -quit"
 alias myip='curl ipinfo.io/ip'
 alias gp="git push origin `git branch | grep \* | cut -d ' ' -f2`"
+alias gg=pr_and_review
 alias git=hub
+
