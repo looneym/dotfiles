@@ -24,7 +24,8 @@ export PATH=$PATH:~/dotfiles/bin
 #
 ################################################################################
 
-export EDITOR='vim'
+export VISUAL=vim
+export EDITOR="$VISUAL"
 
 # load machine-specific config
 source ~/.transient.zshrc
@@ -61,3 +62,4 @@ alias pysrv='python -m SimpleHTTPServer'
 alias dirfind="find $1 -maxdepth 1 -type d -name $2 -print -quit"
 alias myip='curl ipinfo.io/ip'
 alias gp="git push origin `git branch | grep \* | cut -d ' ' -f2`"
+alias git=hub
