@@ -47,11 +47,9 @@ else
 fi
     
 # manipulate dotfiles
-alias tedit='vim ~/.transient.zshrc' 
-alias zedit='vim ~/.zshrc'
-alias zsource='source ~/.zshrc'
-alias vedit='vim ~/.vimrc'
-alias vsource='source ~/.vimrc'
+alias te='vim ~/.transient.zshrc' 
+alias ze='vim ~/.zshrc'
+alias zs='source ~/.zshrc && echo Succesfully reloaded .zshrc! 🎉'
 
 # misc utilities
 
@@ -81,4 +79,6 @@ alias myip='curl ipinfo.io/ip'
 alias gp="git push origin `git branch | grep \* | cut -d ' ' -f2`"
 alias gg=pr_and_review
 alias git=hub
+alias be="bundle exec"
+alias bi="bundle install"
 
