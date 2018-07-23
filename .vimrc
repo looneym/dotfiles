@@ -8,26 +8,32 @@
 
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
-Plugin 'VundleVim/Vundle.vim'
+" Plugin 'VundleVim/Vundle.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'junegunn/fzf.vim'
 Plugin 'tpope/vim-commentary'
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'tpope/vim-fugitive'
 Plugin 'ludovicchabant/vim-gutentags'
-Plugin 'metakirby5/codi.vim'
-Plugin 'lfv89/vim-interestingwords'
 Plugin 'tpope/vim-rails'
-Plugin 'ruanyl/vim-gh-line'
+Plugin 'lfv89/vim-interestingwords'
 Plugin 'jeetsukumaran/vim-buffergator'
 Plugin 'thiagoalessio/rainbow_levels.vim'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'majutsushi/tagbar'
+Plugin 'mileszs/ack.vim'
+Plugin 'w0rp/ale'
+Plugin 'pseewald/vim-anyfold'
+Plugin 'dhruvasagar/vim-zoom'
+Plugin 'mhinz/vim-signify'
+Plugin 'chriskempson/tomorrow-theme', {'rtp': 'vim/'}
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+Plugin 'christoomey/vim-tmux-navigator'
+Plugin 'christoomey/vim-tmux-runner'
+Plugin 'JamshedVesuna/vim-markdown-preview'
+Plugin 'k0kubun/vim-open-github'
+Plugin 'MattesGroeger/vim-bookmarks'
+Plugin 'Shougo/denite.nvim'
 call vundle#end()     
-filetype plugin indent on 
-
 
 """""""""""""""""""""""""""""""""""""""
 "
@@ -36,12 +42,25 @@ filetype plugin indent on
 "
 "
 """""""""""""""""""""""""""""""""""""""
+let vim_markdown_preview_github=1
+let vim_markdown_preview_browser='Google Chrome'
+" nnoremap r :VtrOpenRunner<CR>
+" nnoremap fr :VtrFocusRunner<CR>
+" nnoremap scr :VtrSendCommandToRunner! 
+" nnoremap rsl:VtrSendLinesToRunner<CR>
+" " vnoremap slr :VtrSendLinesToRunner<CR>
+" " xnoremap slr :VtrSendLinesToRunner<CR>
+" nnoremap rk :VtrKillRunner<CR>
 
-""
-"" => rainbow levels
-""
+colorscheme Tomorrow-Night-Eighties
+let g:airline_theme='tomorrow'
+let g:airline_section_b = ''
+let g:airline_section_y = ''
+let g:airline_section_error = ''
+let g:airline_section_warning = ''
+
+"" rainbow levels
 map <leader>l :RainbowLevelsToggle<cr>
-" color scheme for indent-based syntax highlighting with rainbowlevels
 let g:rainbow_levels = [
     \{'ctermfg': 68,  'guifg': '#6699cc'},
     \{'ctermfg': 203, 'guifg': '#ec5f67'},
@@ -52,32 +71,22 @@ let g:rainbow_levels = [
     \{'ctermfg': 73,  'guifg': '#62b3b2'},
     \{'ctermfg': 137, 'guifg': '#ab7967'}]
 
-""
-"" => buggergator
-""
-" open buffer list in current pane (do not use project drawer"
-let  g:buffergator_viewport_split_policy='n'
-map <C-b> :BuffergatorToggle<CR>
+"" buggergator
+noremap <nowait> <Leader>b :BuffergatorToggle <CR>
+let g:buffergator_viewport_split_policy="T"
 
-""
-"" => you complete me
-""
+"" you complete me
 let g:ycm_autoclose_preview_window_after_completion=1
 
-""
-"" => fuzzy finder
-""
+"" fuzzy finder
 let $FZF_DEFAULT_COMMAND='find . '
-nnoremap <Leader>f : Files <ENTER> 
+nnoremap <Leader>o : Files <ENTER> 
 set rtp+=/usr/local/opt/fzf
 
+"" nerd tree
+map <Leader>n :NERDTreeToggle<CR>
 
-""
-"" => nerd tree
-""
-" open file exploerer  in current pane (do not use project drawer"
-map <Leader>n :e .<CR>
- 
+map <Leader>gh :OpenGithub<CR>
 
 """""""""""""""""""""""""""""""""""""""
 "
@@ -86,11 +95,16 @@ map <Leader>n :e .<CR>
 "
 "
 """""""""""""""""""""""""""""""""""""""
-
+ 
+" disable arrow keys to be extra 1337
+noremap <Up> <Nop>
+noremap <Down> <Nop>
+noremap <Left> <Nop>
+noremap <Right> <Nop>
 " cycle between split panes
-nnoremap - <c-w>W
+noremap - <c-w>W
+noremap = <c-w>W
 nnoremap H <c-w>W
-nnoremap = <c-w>w
 nnoremap L <c-w>w
 
 " cycle between tabs
@@ -105,28 +119,23 @@ nnoremap + :tabn <ENTER>
 :nnoremap <Leader>t :tabnew<CR>
 :nnoremap <Leader>T :tabclose!<CR>
 
-"" Quickly resize split panes
-noremap vu :vertical resize +5<CR>
-noremap vd :vertical resize -5<CR>
-noremap hu :resize +5<CR>
-noremap hd :resize -5<CR>
 
-
+nnoremap <space> :
+nnoremap <leader>w :w<CR>
 """""""""""""""""""""""""""""""""""""""
 "
 "
-"      GENERAL USABILITY STUFF
+"      MISC
 "
 "
 """""""""""""""""""""""""""""""""""""""
  
 " delete without saving to clipboard
 nnoremap <leader>d "_d
-vnoremap <leader>d "_d
-vnoremap <leader>p "_dP
 
-" find and replace all isntances of word under cursor
-:nnoremap <Leader>s :%s/\<<C-r><C-w>\>/
+" Sane locations for new split panes
+set splitbelow
+set splitright
 
 " reload current file
 :nnoremap <Leader>r :e!<CR>
@@ -154,16 +163,31 @@ set backspace=indent,eol,start
 set ruler
 set number 
 
-" Switch to previous buffer
-nnoremap <leader><leader> <c-^>
+" Switch to previous buffer 
+noremap <Leader><Leader> :b#<CR>
 
-" misc
+" Allow movement with ctrl and hjlk in insert mode
+inoremap <C-k> <Up>
+inoremap <C-j> <Down>
+inoremap <C-l> <Right>
+inoremap <C-h> <Left>
+
+" Quickly resize split panes
+" noremap vu :vertical resize +5<CR>
+" noremap vd :vertical resize -5<CR>
+" noremap hu :resize +5<CR>
+" noremap hd :resize -5<CR>
+
 filetype off                  
 set nocompatible  
 set commentstring=#\ %s
 set mouse=a
 set noswapfile
 syntax enable
+inoremap jk <Esc>
+let g:ale_set_highlights = 0
+filetype plugin indent on 
+xnoremap p pgvy
 
 """""""""""""""""""""""""""""""""""""""
 "
@@ -178,16 +202,46 @@ highlight DiffDelete cterm=bold ctermfg=10 ctermbg=17 gui=none guifg=bg guibg=Re
 highlight DiffChange cterm=bold ctermfg=10 ctermbg=17 gui=none guifg=bg guibg=Red
 highlight DiffText   cterm=bold ctermfg=10 ctermbg=88 gui=none guifg=bg guibg=Red
 
-
 """""""""""""""""""""""""""""""""""""""
 "
 "
-"      COLORS AND THEMES
+"      PREVIEW TAG
 "
 "
 """""""""""""""""""""""""""""""""""""""
 
+function! PreviewWindowOpened()
+    for nr in range(1, winnr('$'))
+        if getwinvar(nr, "&pvw") == 1
+            return 1
+        endif  
+    endfor
+     return 0
+endfun
 
-let g:airline_theme='cobalt2'
-let g:airline_powerline_fonts = 1
+function! TogglePreview()
+  let po=PreviewWindowOpened()
+  if po == 1
+    :pc
+  else
+    let l:tag = expand("<cword>")
+     execute "ptag " . l:tag
+  endif
+endfunction
+
+function! ToggleUncertainPreview()
+  let po=PreviewWindowOpened()
+  if po == 1
+    :pc
+  else
+    let l:tag = expand("<cword>")
+     execute "pts " . l:tag
+  endif
+endfunction
+
+noremap <nowait> <Leader>p :silent call TogglePreview()<CR>
+noremap <nowait> <Leader>P :call ToggleUncertainPreview()<CR>
+
+" set incsearch
+" set hlsearch
 
