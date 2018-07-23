@@ -1,3 +1,4 @@
+"
 """""""""""""""""""""""""""""""""""""""
 "
 "
@@ -25,10 +26,25 @@ Plugin 'jeetsukumaran/vim-buffergator'
 Plugin 'thiagoalessio/rainbow_levels.vim'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'majutsushi/tagbar'
+Plugin 'mileszs/ack.vim'
+Plugin 'wesQ3/vim-windowswap'
+Plugin 'w0rp/ale'
 call vundle#end()     
 filetype plugin indent on 
 
 
+"""""""""""""""""""""""""""""""""""""""
+"
+"
+"      JUNK DRAWER
+"
+"
+"""""""""""""""""""""""""""""""""""""""
+function! AddBookmark()
+    execute "!" . "add_nerdtree_bookmark" " " . bufname("%")
+endfunction
+
+nnoremap <leader>m :call AddBookmark()<cr>
 """""""""""""""""""""""""""""""""""""""
 "
 "
@@ -56,9 +72,9 @@ let g:rainbow_levels = [
 "" => buggergator
 ""
 " open buffer list in current pane (do not use project drawer"
-let  g:buffergator_viewport_split_policy='n'
-map <C-b> :BuffergatorToggle<CR>
-
+noremap <Leader><Leader> :BuffergatorToggle <CR>
+noremap <nowait> <Leader>bb :BuffergatorToggle <CR>
+let g:buffergator_viewport_split_policy="T"
 ""
 "" => you complete me
 ""
@@ -76,7 +92,7 @@ set rtp+=/usr/local/opt/fzf
 "" => nerd tree
 ""
 " open file exploerer  in current pane (do not use project drawer"
-map <Leader>n :e .<CR>
+map <Leader>n :NERDTreeToggle<CR>
  
 
 """""""""""""""""""""""""""""""""""""""
@@ -101,9 +117,9 @@ nnoremap + :tabn <ENTER>
 :nnoremap <Leader>v :vnew<CR>
 :nnoremap <Leader>h :new<CR>
 
-" new tab
-:nnoremap <Leader>t :tabnew<CR>
-:nnoremap <Leader>T :tabclose!<CR>
+" " new tab
+" :nnoremap <Leader>t :tabnew<CR>
+" :nnoremap <Leader>T :tabclose!<CR>
 
 "" Quickly resize split panes
 noremap vu :vertical resize +5<CR>
@@ -155,7 +171,7 @@ set ruler
 set number 
 
 " Switch to previous buffer
-nnoremap <leader><leader> <c-^>
+"nnoremap <leader><leader> <c-^>
 
 " misc
 filetype off                  
@@ -190,4 +206,4 @@ highlight DiffText   cterm=bold ctermfg=10 ctermbg=88 gui=none guifg=bg guibg=Re
 
 let g:airline_theme='cobalt2'
 let g:airline_powerline_fonts = 1
-
+ let g:ale_set_highlights = 0
