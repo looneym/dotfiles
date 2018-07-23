@@ -1,3 +1,4 @@
+echo "Hey I'm your profile"
 ################################################################################
 #
 #  zsh/oh-my-zsh config stuff
@@ -5,80 +6,108 @@
 ################################################################################
 
 export ZSH=~/.oh-my-zsh
-ZSH_THEME="cobalt2"
+ZSH_THEME="looneym"
 source $ZSH/oh-my-zsh.sh
-plugins=(git)
-export TERM=xterm-256color
-
+export TERM=screen-256color
+plugins=(
+  git
+  rbenv
+  ruby     
+)
+autoload -U compinit && compinit
+ export KEYTIMEOUT=1
 ################################################################################
 #
-#  set $PATH
+#  Misc
 #
 ################################################################################
 
 export PATH=$PATH:~/dotfiles/bin
-
-################################################################################
-#
-#  personal configs
-#
-################################################################################
-
-export VISUAL=vim
-export EDITOR="$VISUAL"
-
+export EDITOR=vim
+# Vim mode for command line editing
+# bindkey -v
 # load machine-specific config
-source ~/.transient.zshrc
+source ~/.transient
 
-# tmuxinator stuff
-export DEFAULT_USER='looneym'
-alias muxc="cd ~/.config/tmuxinator/"
-alias mux="tmuxinator"
-export TMUXINATOR_CONFIG=$HOME/dotfiles/tmuxinator
+export LC_CTYPE=en_US.UTF-8
+export LANG=en_US.UTF-8
 
-# Set correct vim version based on OS version
-osx_version=$(defaults read loginwindow SystemVersionStampAsString)
-function version_gt() { test "$(printf '%s\n' "$@" | sort  | head -n 1)" != "$1"; }
-yosemite=10.10.5
-if version_gt $osx_version $yosemite; then
-  alias vim='/usr/local/Cellar/vim/8.0.1350/bin/vim' 
-else
-  alias vim='/Applications/MacVim.app/Contents/MacOS/Vim'
-fi
-    
+################################################################################
+#
+#  Aliases
+#
+################################################################################
+
 # manipulate dotfiles
-alias te='vim ~/.transient.zshrc' 
+alias te='vim ~/.transient' 
 alias ze='vim ~/.zshrc'
 alias zs='source ~/.zshrc && echo Succesfully reloaded .zshrc! 🎉'
 
-# misc utilities
+# Git
+alias git="noglob hub"
+alias gb="git branch"
+alias gca="git commit --amend --no-edit"
+alias gcae="git commit --amend"
+alias gcm="git commit"
+alias gco="git checkout"
+alias gd="git difftool"
+alias gdm="echo 'Comparing changes against origin/master' &&git difftool origin/master"
+alias gfa="git fetch --all"
+alias glo="git log --oneline"
+alias gs="git status"
+alias gc="git commit -m "
+alias gpub="git publish | grep 'pull/new' | awk '{ print $2 }' | pbcopy && echo 'Link copied to clipboard'"
+alias gzoom="gco master && git pull"
+alias gzoom!="git stash && gco master && git pull"
 
-function pr_and_review() {
-  if [ "$2" == "" ]
-  then
-    channel='team-respond-eng'
-  else
-   channel=$2   
- fi
-  git push origin `git branch | grep \* | cut -d ' ' -f2`
-  vim /tmp/hub_pr_message.txt < `tty` > `tty`
-  hub pull-request -F - < /tmp/hub_pr_message.txt > /tmp/hub_pr_url.txt
-  read -r pr_title</tmp/hub_pr_message.txt
-  pull-to-slack $channel  ":pr: ${pr_title} `cat /tmp/hub_pr_url.txt`"
-  rm /tmp/hub_pr_url.txt
-  rm /tmp/hub_pr_message.txt
-}
+# What's my ip?
+alias eip='curl ipinfo.io/ip'
+alias iip="ipconfig getifaddr en0"
 
-alias venvup='source venv/bin/activate'
-alias venvinit='virtualenv venv && source venv/bin/activate'
-alias lsdir='ls -d */'
-alias procfind="ps ax | grep $1"
-alias pysrv='python -m SimpleHTTPServer'
-alias dirfind="find $1 -maxdepth 1 -type d -name $2 -print -quit"
-alias myip='curl ipinfo.io/ip'
-alias gp="git push origin `git branch | grep \* | cut -d ' ' -f2`"
-alias gg=pr_and_review
-alias git=hub
-alias be="bundle exec"
-alias bi="bundle install"
+alias ic="ruby ~/src/intercom/bin/intercom-cli" 
+# This must be loaded last
+# plugins=( zsh-syntax-highlighting )
+# echo "source ${(q-)PWD}/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" >> ${ZDOTDIR:-$HOME}/.zshrc
+alias scr="vim ~/notes/scratch"
+alias src="cd ~/src"
+alias tmp="cd ~/tmp"
 
+# alias for dev version of bundler
+alias dbundle="/Users/micheallooney/src/bundler/bin/bundle"
+
+alias v="vim -"
+alias up="cd $( pwd | awk -F/  '{project_root=""; for(i=2;i<=5;i++){project_root=project_root"/"$i}; print project_root}')"
+alias noop="git checkout master && git pull && git checkout -b ml/noop && git commit --allow-empty -m \"noop\""
+
+alias intercom="cd ~/src/intercom"
+alias embercom="cd ~/src/embercom"
+alias muster="cd ~/src/muster"
+alias buildkite="cd ~/src/buildkite-test-pipeline/"
+alias hustle="cd ~/src/hustle"
+
+################################################################################
+#
+#  Seperator to keey auto-added junk away from my settings
+#
+################################################################################
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+source /Users/micheallooney/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+# export PS1=$PS1:""
+PS1="
+$PS1 \
+
+
+  λ "
+
+PS2="
+$PS2 \
+
+
+  lul "
+
+
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"

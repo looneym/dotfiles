@@ -1,7 +1,5 @@
 *.swp
-.vim/autoload
-.vim/bundle/*
-!.vim/bundle/Vundle.vim
+.vim
 Gemfile.lock
 tags.lock
 tags.temp

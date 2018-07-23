@@ -1,0 +1,55 @@
+[user]
+	; name = Micheal Looney
+	; email = micheal.looney@intercom.io
+[init]
+	templatedir = ~/.git_template
+[core]
+	excludesfile = ~/.gitignore_global
+[rebase]
+    autostash = true
+[diff]
+  tool = vimdiff
+[alias]
+  ################################################################################
+  #
+  # Working with branches
+  #
+  ################################################################################
+
+  # Get the current branch name (not so useful in itself, but used in
+  # other aliases)
+  branch-name = "!git rev-parse --abbrev-ref HEAD"
+  # Push the current branch to the remote "origin", and set it to track
+  # the upstream branch
+  publish = "!git push -u origin $(git branch-name)"
+  # Do the same as publish, but force push, as long as nobody else has made changes to the branch
+  fpublish = "!git push -u origin $(git branch-name) --force-with-lease"
+  # Delete the remote version of the current branch
+  unpublish = "!git push origin :$(git branch-name)"
+  # Delete a branch and recreate it from master — useful if you have, say,
+  # a development branch and a master branch and they could conceivably go
+  # out of sync
+  recreate = "!f() { [[ -n $@ ]] && git checkout \"$@\" && git unpublish && git checkout master && git branch -D \"$@\" && git checkout -b \"$@\" && git publish; }; f"
+
+  ################################################################################
+  #
+  # Working with files
+  #
+  ################################################################################
+
+  # Unstage any files that have been added to the staging area
+  unstage = reset HEAD
+  # Show changes that have been staged
+  diffc = diff --cached
+
+  # Checkout our version of a file and add it
+  ours = "!f() { git checkout --ours $@ && git add $@; }; f"
+  # Checkout their version of a file and add it
+  theirs = "!f() { git checkout --theirs $@ && git add $@; }; f"
+
+  # Delete any branches that have been merged into master
+  # See also: https://gist.github.com/robmiller/5133264
+  delete-merged-branches = "!git co master && git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d"
+[user]
+	name = Micheal Looney
+	email = micheal.looney@intercom.io
