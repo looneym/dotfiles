@@ -1,5 +1,4 @@
-"
-"""""""""""""""""""""""""""""""""""""""
+" """"""""""""""""""""""""""""""""""""""e"
 "
 "
 "      INSTALL PLUGINS
@@ -13,8 +12,8 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'junegunn/fzf.vim'
 Plugin 'tpope/vim-commentary'
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
+" Plugin 'vim-airline/vim-airline'
+" Plugin 'vim-airline/vim-airline-themes'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'tpope/vim-fugitive'
 Plugin 'ludovicchabant/vim-gutentags'
@@ -29,6 +28,9 @@ Plugin 'majutsushi/tagbar'
 Plugin 'mileszs/ack.vim'
 Plugin 'wesQ3/vim-windowswap'
 Plugin 'w0rp/ale'
+Plugin 'pseewald/vim-anyfold'
+Plugin 'dhruvasagar/vim-zoom'
+Plugin 'joukevandermaas/vim-ember-hbs'
 call vundle#end()     
 filetype plugin indent on 
 
@@ -45,6 +47,7 @@ function! AddBookmark()
 endfunction
 
 nnoremap <leader>m :call AddBookmark()<cr>
+nnoremap <Space> <Esc>
 """""""""""""""""""""""""""""""""""""""
 "
 "
@@ -72,8 +75,8 @@ let g:rainbow_levels = [
 "" => buggergator
 ""
 " open buffer list in current pane (do not use project drawer"
-noremap <Leader><Leader> :BuffergatorToggle <CR>
-noremap <nowait> <Leader>bb :BuffergatorToggle <CR>
+noremap <Leader><Leader> :b#<CR>
+noremap <nowait> <Leader>b :BuffergatorToggle <CR>
 let g:buffergator_viewport_split_policy="T"
 ""
 "" => you complete me
@@ -84,10 +87,12 @@ let g:ycm_autoclose_preview_window_after_completion=1
 "" => fuzzy finder
 ""
 let $FZF_DEFAULT_COMMAND='find . '
-nnoremap <Leader>f : Files <ENTER> 
+nnoremap <Leader>o : Files <ENTER> 
 set rtp+=/usr/local/opt/fzf
 
 
+nnoremap <Leader>f : Ag <ENTER> 
+nnoremap <Leader>a : A <ENTER> 
 ""
 "" => nerd tree
 ""
@@ -102,11 +107,15 @@ map <Leader>n :NERDTreeToggle<CR>
 "
 "
 """""""""""""""""""""""""""""""""""""""
-
+" disable arrow keys to be extra 1337
+noremap <Up> <Nop>
+noremap <Down> <Nop>
+noremap <Left> <Nop>
+noremap <Right> <Nop>
 " cycle between split panes
-nnoremap - <c-w>W
+noremap - <c-w>W
+noremap = <c-w>W
 nnoremap H <c-w>W
-nnoremap = <c-w>w
 nnoremap L <c-w>w
 
 " cycle between tabs
@@ -121,11 +130,11 @@ nnoremap + :tabn <ENTER>
 " :nnoremap <Leader>t :tabnew<CR>
 " :nnoremap <Leader>T :tabclose!<CR>
 
-"" Quickly resize split panes
-noremap vu :vertical resize +5<CR>
-noremap vd :vertical resize -5<CR>
-noremap hu :resize +5<CR>
-noremap hd :resize -5<CR>
+" "" Quickly resize split panes
+" noremap vu :vertical resize +5<CR>
+" noremap vd :vertical resize -5<CR>
+" noremap hu :resize +5<CR>
+" noremap hd :resize -5<CR>
 
 
 """""""""""""""""""""""""""""""""""""""
@@ -142,7 +151,20 @@ vnoremap <leader>d "_d
 vnoremap <leader>p "_dP
 
 " find and replace all isntances of word under cursor
-:nnoremap <Leader>s :%s/\<<C-r><C-w>\>/
+"
+" :nnoremap <Leader>s :%s/\<<C-r><C-w>\>/
+:nnoremap <Leader>s :! echo Running spec: % &&rspec % <CR>
+:nnoremap <Leader>S :! echo Running spec:  expand(SpecWithLineNum()) 
+" && rspec expand(SpecWithLineNum())<CR>
+
+function! SpecWithLineNum()
+  return spec_with_line=join([expand('%'),  line(".")], ':') 
+endfun
+set splitbelow
+set splitright
+
+
+ " :echo join([expand('%'),  line(".")], ':')
 
 " reload current file
 :nnoremap <Leader>r :e!<CR>
@@ -204,6 +226,50 @@ highlight DiffText   cterm=bold ctermfg=10 ctermbg=88 gui=none guifg=bg guibg=Re
 """""""""""""""""""""""""""""""""""""""
 
 
-let g:airline_theme='cobalt2'
-let g:airline_powerline_fonts = 1
+" let g:airline_theme='cobalt2'
+" let g:airline_powerline_fonts = 1
  let g:ale_set_highlights = 0
+let g:tagbar_map_closefold = "r"
+let g:tagbar_map_closeallfolds = "R"
+:command! Qa qa
+" :command Qa! qa!
+"
+" noremap <nowait> <Leader>p <C-W>}
+noremap <Leader>z <C-W>z
+
+function! PreviewWindowOpened()
+    for nr in range(1, winnr('$'))
+        if getwinvar(nr, "&pvw") == 1
+            return 1
+        endif  
+    endfor
+     return 0
+endfun
+
+function! TogglePreview()
+  let po=PreviewWindowOpened()
+  if po == 1
+    :pc
+  else
+    let l:tag = expand("<cword>")
+     execute "ptag " . l:tag
+  endif
+endfunction
+
+function! ToggleUncertainPreview()
+  let po=PreviewWindowOpened()
+  if po == 1
+    :pc
+  else
+    let l:tag = expand("<cword>")
+     execute "pts " . l:tag
+  endif
+endfunction
+
+noremap <nowait> <Leader>p :silent call TogglePreview()<CR>
+noremap <nowait> <Leader>P :call ToggleUncertainPreview()<CR>
+inoremap <C-k> <Up>
+inoremap <C-j> <Down>
+inoremap <C-l> <Right>
+inoremap <C-h> <Left>
+inoremap jk <Esc>
