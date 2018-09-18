@@ -25,7 +25,7 @@
 
   # Fire up your difftool (e.g. Kaleidescope) with all the changes that
   # are on the current branch.
-  code-review = difftool origin/master...
+  code-review = difftool origin/master
 
   # Given a merge commit, find the span of commits that exist(ed) on that
   # branch. Again, not so useful in itself, but used by other aliases.
@@ -68,3 +68,5 @@
   # See also: https://gist.github.com/robmiller/5133264
   delete-merged-branches = "!git co master && git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d"
 
+[diff]
+  tool = vimdiff
