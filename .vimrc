@@ -12,42 +12,20 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'junegunn/fzf.vim'
 Plugin 'tpope/vim-commentary'
-" Plugin 'vim-airline/vim-airline'
-" Plugin 'vim-airline/vim-airline-themes'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'tpope/vim-fugitive'
 Plugin 'ludovicchabant/vim-gutentags'
-Plugin 'metakirby5/codi.vim'
 Plugin 'lfv89/vim-interestingwords'
 Plugin 'tpope/vim-rails'
-Plugin 'ruanyl/vim-gh-line'
 Plugin 'jeetsukumaran/vim-buffergator'
 Plugin 'thiagoalessio/rainbow_levels.vim'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'majutsushi/tagbar'
 Plugin 'mileszs/ack.vim'
-Plugin 'wesQ3/vim-windowswap'
 Plugin 'w0rp/ale'
 Plugin 'pseewald/vim-anyfold'
 Plugin 'dhruvasagar/vim-zoom'
-Plugin 'joukevandermaas/vim-ember-hbs'
+Plugin 'mhinz/vim-signify'
 call vundle#end()     
-filetype plugin indent on 
 
-
-"""""""""""""""""""""""""""""""""""""""
-"
-"
-"      JUNK DRAWER
-"
-"
-"""""""""""""""""""""""""""""""""""""""
-function! AddBookmark()
-    execute "!" . "add_nerdtree_bookmark" " " . bufname("%")
-endfunction
-
-nnoremap <leader>m :call AddBookmark()<cr>
-nnoremap <Space> <Esc>
 """""""""""""""""""""""""""""""""""""""
 "
 "
@@ -74,10 +52,8 @@ let g:rainbow_levels = [
 ""
 "" => buggergator
 ""
-" open buffer list in current pane (do not use project drawer"
-noremap <Leader><Leader> :b#<CR>
 noremap <nowait> <Leader>b :BuffergatorToggle <CR>
-let g:buffergator_viewport_split_policy="T"
+
 ""
 "" => you complete me
 ""
@@ -90,16 +66,11 @@ let $FZF_DEFAULT_COMMAND='find . '
 nnoremap <Leader>o : Files <ENTER> 
 set rtp+=/usr/local/opt/fzf
 
-
-nnoremap <Leader>f : Ag <ENTER> 
-nnoremap <Leader>a : A <ENTER> 
 ""
 "" => nerd tree
 ""
-" open file exploerer  in current pane (do not use project drawer"
 map <Leader>n :NERDTreeToggle<CR>
  
-
 """""""""""""""""""""""""""""""""""""""
 "
 "
@@ -107,6 +78,7 @@ map <Leader>n :NERDTreeToggle<CR>
 "
 "
 """""""""""""""""""""""""""""""""""""""
+ 
 " disable arrow keys to be extra 1337
 noremap <Up> <Nop>
 noremap <Down> <Nop>
@@ -126,45 +98,24 @@ nnoremap + :tabn <ENTER>
 :nnoremap <Leader>v :vnew<CR>
 :nnoremap <Leader>h :new<CR>
 
-" " new tab
-" :nnoremap <Leader>t :tabnew<CR>
-" :nnoremap <Leader>T :tabclose!<CR>
-
-" "" Quickly resize split panes
-" noremap vu :vertical resize +5<CR>
-" noremap vd :vertical resize -5<CR>
-" noremap hu :resize +5<CR>
-" noremap hd :resize -5<CR>
-
+" new tab
+:nnoremap <Leader>t :tabnew<CR>
+:nnoremap <Leader>T :tabclose!<CR>
 
 """""""""""""""""""""""""""""""""""""""
 "
 "
-"      GENERAL USABILITY STUFF
+"      MISC
 "
 "
 """""""""""""""""""""""""""""""""""""""
  
 " delete without saving to clipboard
 nnoremap <leader>d "_d
-vnoremap <leader>d "_d
-vnoremap <leader>p "_dP
 
-" find and replace all isntances of word under cursor
-"
-" :nnoremap <Leader>s :%s/\<<C-r><C-w>\>/
-:nnoremap <Leader>s :! echo Running spec: % &&rspec % <CR>
-:nnoremap <Leader>S :! echo Running spec:  expand(SpecWithLineNum()) 
-" && rspec expand(SpecWithLineNum())<CR>
-
-function! SpecWithLineNum()
-  return spec_with_line=join([expand('%'),  line(".")], ':') 
-endfun
+" Sane locations for new split panes
 set splitbelow
 set splitright
-
-
- " :echo join([expand('%'),  line(".")], ':')
 
 " reload current file
 :nnoremap <Leader>r :e!<CR>
@@ -192,16 +143,30 @@ set backspace=indent,eol,start
 set ruler
 set number 
 
-" Switch to previous buffer
-"nnoremap <leader><leader> <c-^>
+" Switch to previous buffer 
+noremap <Leader><Leader> :b#<CR>
 
-" misc
+" Allow movement with ctrl and hjlk in insert mode
+inoremap <C-k> <Up>
+inoremap <C-j> <Down>
+inoremap <C-l> <Right>
+inoremap <C-h> <Left>
+
+" Quickly resize split panes
+" noremap vu :vertical resize +5<CR>
+" noremap vd :vertical resize -5<CR>
+" noremap hu :resize +5<CR>
+" noremap hd :resize -5<CR>
+
 filetype off                  
 set nocompatible  
 set commentstring=#\ %s
 set mouse=a
 set noswapfile
 syntax enable
+inoremap jk <Esc>
+let g:ale_set_highlights = 0
+filetype plugin indent on 
 
 """""""""""""""""""""""""""""""""""""""
 "
@@ -216,26 +181,13 @@ highlight DiffDelete cterm=bold ctermfg=10 ctermbg=17 gui=none guifg=bg guibg=Re
 highlight DiffChange cterm=bold ctermfg=10 ctermbg=17 gui=none guifg=bg guibg=Red
 highlight DiffText   cterm=bold ctermfg=10 ctermbg=88 gui=none guifg=bg guibg=Red
 
-
 """""""""""""""""""""""""""""""""""""""
 "
 "
-"      COLORS AND THEMES
+"      PREVIEW TAG
 "
 "
 """""""""""""""""""""""""""""""""""""""
-
-
-" let g:airline_theme='cobalt2'
-" let g:airline_powerline_fonts = 1
- let g:ale_set_highlights = 0
-let g:tagbar_map_closefold = "r"
-let g:tagbar_map_closeallfolds = "R"
-:command! Qa qa
-" :command Qa! qa!
-"
-" noremap <nowait> <Leader>p <C-W>}
-noremap <Leader>z <C-W>z
 
 function! PreviewWindowOpened()
     for nr in range(1, winnr('$'))
@@ -268,8 +220,4 @@ endfunction
 
 noremap <nowait> <Leader>p :silent call TogglePreview()<CR>
 noremap <nowait> <Leader>P :call ToggleUncertainPreview()<CR>
-inoremap <C-k> <Up>
-inoremap <C-j> <Down>
-inoremap <C-l> <Right>
-inoremap <C-h> <Left>
-inoremap jk <Esc>
+
