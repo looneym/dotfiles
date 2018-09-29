@@ -10,6 +10,7 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'scrooloose/nerdtree'
+Plugin 'junegunn/fzf'
 Plugin 'junegunn/fzf.vim'
 Plugin 'tpope/vim-commentary'
 Plugin 'Valloric/YouCompleteMe'
@@ -64,7 +65,7 @@ let g:ycm_autoclose_preview_window_after_completion=1
 ""
 let $FZF_DEFAULT_COMMAND='find . '
 nnoremap <Leader>o : Files <ENTER> 
-set rtp+=/usr/local/opt/fzf
+set rtp+=~/.fzf/bin/fzf
 
 ""
 "" => nerd tree

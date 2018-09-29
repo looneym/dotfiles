@@ -22,6 +22,7 @@ autoload -U compinit && compinit
 ################################################################################
 
 export PATH=$PATH:~/dotfiles/bin
+export PATH=$PATH:~/.fzf/bin
 export EDITOR=vim
 # load machine-specific config
 source ~/.transient

@@ -13,3 +13,12 @@ done
 ln -sf ~/dotfiles/looneym.zsh-theme ~/.oh-my-zsh/themes/looneym.zsh-theme
 
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+
+sudo apt install build-essential cmake python3-dev ctags silversearcher-ag fzf
+cd ~/.vim/bundle/YouCompleteMe
+python3 install.py
+
+git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+~/.fzf/install --bin
+
+git remote set-url origin git@github.com:looneym/dotfiles.git

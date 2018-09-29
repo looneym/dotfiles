@@ -1,10 +1,10 @@
 [user]
 	name = Micheal Looney
-	email = micheal.looney@intercom.io
+	email = looneymicheal@gmail.com
 [init]
 	templatedir = ~/.git_template
 [core]
-	excludesfile = /Users/micheallooney/.gitignore_global
+	excludesfile = /home/looneym/.gitignore.global
 [rebase]
     autostash = true
 [diff]
