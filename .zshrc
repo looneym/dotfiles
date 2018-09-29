@@ -24,7 +24,7 @@ autoload -U compinit && compinit
 export PATH=$PATH:~/dotfiles/bin
 export EDITOR=vim
 # load machine-specific config
-source ~/.transient.zshrc
+source ~/.transient
 
 ################################################################################
 #
