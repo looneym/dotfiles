@@ -9,3 +9,9 @@ for file in $files; do
     echo "Creating symlink to $file in home directory."
     ln -sf $dir/$file ~/$file
 done
+
+curl https://raw.githubusercontent.com/wesbos/Cobalt3-iterm/master/cobalt2.zsh-theme >> ~/.oh-my-zsh/themes/cobalt2.zsh-theme
+# pip install --user powerline-status
+# git clone https://github.com/powerline/fonts
+# cd fonts
+# ./install.sh
