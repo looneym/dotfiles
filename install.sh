@@ -10,5 +10,6 @@ for file in $files; do
     ln -sf $dir/$file ~/$file
 done
 
-ln -sf looneym.zsh-theme ~/.oh-my-zsh/themes/looneym.zsh-theme
+ln -sf ~/dotfiles/looneym.zsh-theme ~/.oh-my-zsh/themes/looneym.zsh-theme
+
 
