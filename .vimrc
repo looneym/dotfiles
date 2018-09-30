@@ -167,6 +167,7 @@ syntax enable
 inoremap jk <Esc>
 let g:ale_set_highlights = 0
 filetype plugin indent on 
+xnoremap p pgvy
 
 """""""""""""""""""""""""""""""""""""""
 "

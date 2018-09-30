@@ -11,7 +11,8 @@
 #   #66cccc Aqua
 #   #6699cc Blue
 #   #cc99cc Purple
-
+ setw -g pane-border-status bottom
+ setw -g pane-border-format '─'
 
 ## set status bar
 set -g status-bg default
@@ -72,4 +73,4 @@ set-window-option -g window-status-current-format '#[fg=#6699cc,bg=#2d2d2d] #I #
 # active terminal yellow border, non-active white
 set -g pane-border-bg default
 set -g pane-border-fg "#999999"
-set -g pane-active-border-fg "#f99157"
+set -g pane-active-border-fg "#999999"
