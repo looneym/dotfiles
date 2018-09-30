@@ -5,7 +5,7 @@
 ################################################################################
 
 export ZSH=~/.oh-my-zsh
-ZSH_THEME="cobalt2"
+ZSH_THEME="looneym"
 source $ZSH/oh-my-zsh.sh
 export TERM=xterm-256color
 plugins=(
