@@ -15,6 +15,7 @@
 
 ## set status bar
 set -g status-bg default
+set -g status-fg colour241
 setw -g window-status-current-bg "#393939"
 setw -g window-status-current-fg "#6699cc"
 
@@ -56,7 +57,7 @@ set -g mode-bg "#f99157"
 set -g status-right-length 100
 set -g status-right-fg black
 set -g status-right-attr bold
-set -g status-right '#[fg=#cc99cc,bg=#2d2d2d] %H:%M |#[fg=#6699cc] %y.%m.%d '
+set -g status-right '#[fg=#cc99cc,bg=#2d2d2d] %H:%M #[fg=#6699cc] %y.%m.%d '
 
 # make background window look like white tab
 set-window-option -g window-status-bg default
