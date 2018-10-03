@@ -25,6 +25,8 @@ Plugin 'pseewald/vim-anyfold'
 Plugin 'dhruvasagar/vim-zoom'
 Plugin 'mhinz/vim-signify'
 Plugin 'chriskempson/tomorrow-theme', {'rtp': 'vim/'}
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 call vundle#end()     
 
 """""""""""""""""""""""""""""""""""""""
@@ -36,6 +38,11 @@ call vundle#end()
 """""""""""""""""""""""""""""""""""""""
 
 colorscheme Tomorrow-Night-Eighties
+let g:airline_theme='tomorrow'
+let g:airline_section_b = ''
+let g:airline_section_y = ''
+let g:airline_section_error = ''
+let g:airline_section_warning = ''
 
 "" rainbow levels
 map <leader>l :RainbowLevelsToggle<cr>
