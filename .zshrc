@@ -41,16 +41,18 @@ alias ze='vim ~/.zshrc'
 alias zs='source ~/.zshrc && echo Succesfully reloaded .zshrc! 🎉'
 
 # Git
+alias git="noglob git"
 alias gb="git branch"
 alias gca="git commit --amend --no-edit"
 alias gcae="git commit --amend"
 alias gcm="git commit"
 alias gco="git checkout"
-alias gd="echo 'Comparing changes against previous local commit' && git difftool"
+alias gd="git difftool"
 alias gdm="echo 'Comparing changes against origin/master' &&git difftool origin/master"
 alias gfa="git fetch --all"
 alias glo="git log --oneline"
 alias gs="git status"
+alias gc="git commit -m "
 
 # What's my ip?
 alias eip='curl ipinfo.io/ip'
