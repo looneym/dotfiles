@@ -27,6 +27,7 @@ Plugin 'mhinz/vim-signify'
 Plugin 'chriskempson/tomorrow-theme', {'rtp': 'vim/'}
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
+Plugin 'christoomey/vim-tmux-navigator'
 call vundle#end()     
 
 """""""""""""""""""""""""""""""""""""""
