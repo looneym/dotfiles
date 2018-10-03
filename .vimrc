@@ -1,4 +1,4 @@
-" """"""""""""""""""""""""""""""""""""""e"
+"""""""""""""""""""""""""""""""""""""""
 "
 "
 "      INSTALL PLUGINS
@@ -24,6 +24,7 @@ Plugin 'w0rp/ale'
 Plugin 'pseewald/vim-anyfold'
 Plugin 'dhruvasagar/vim-zoom'
 Plugin 'mhinz/vim-signify'
+Plugin 'chriskempson/tomorrow-theme', {'rtp': 'vim/'}
 call vundle#end()     
 
 """""""""""""""""""""""""""""""""""""""
@@ -34,11 +35,10 @@ call vundle#end()
 "
 """""""""""""""""""""""""""""""""""""""
 
-""
-"" => rainbow levels
-""
+colorscheme Tomorrow-Night-Eighties
+
+"" rainbow levels
 map <leader>l :RainbowLevelsToggle<cr>
-" color scheme for indent-based syntax highlighting with rainbowlevels
 let g:rainbow_levels = [
     \{'ctermfg': 68,  'guifg': '#6699cc'},
     \{'ctermfg': 203, 'guifg': '#ec5f67'},
@@ -49,26 +49,18 @@ let g:rainbow_levels = [
     \{'ctermfg': 73,  'guifg': '#62b3b2'},
     \{'ctermfg': 137, 'guifg': '#ab7967'}]
 
-""
-"" => buggergator
-""
+"" buggergator
 noremap <nowait> <Leader>b :BuffergatorToggle <CR>
 
-""
-"" => you complete me
-""
+"" you complete me
 let g:ycm_autoclose_preview_window_after_completion=1
 
-""
-"" => fuzzy finder
-""
+"" fuzzy finder
 let $FZF_DEFAULT_COMMAND='find . '
 nnoremap <Leader>o : Files <ENTER> 
 set rtp+=/usr/local/opt/fzf
 
-""
-"" => nerd tree
-""
+"" nerd tree
 map <Leader>n :NERDTreeToggle<CR>
  
 """""""""""""""""""""""""""""""""""""""
