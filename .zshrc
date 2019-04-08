@@ -1,4 +1,3 @@
-echo "Hey I'm your profile"
 ################################################################################
 #
 #  zsh/oh-my-zsh config stuff
@@ -11,8 +10,6 @@ source $ZSH/oh-my-zsh.sh
 export TERM=screen-256color
 plugins=(
   git
-  gitfast
-  zsh-completions
 )
 autoload -U compinit && compinit
  export KEYTIMEOUT=1
@@ -91,26 +88,12 @@ alias hustle="cd ~/src/hustle"
 #
 ################################################################################
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
 source $HOME/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-# export PS1=$PS1:""
 PS1="
 $PS1 \
 
 
   λ "
-
-PS2="
-$PS2 \
-
-
-  lul "
-
-
-export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
 eval "$(intercom-linux-env)"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
