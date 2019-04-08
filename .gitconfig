@@ -4,7 +4,7 @@
 [init]
 	templatedir = ~/.git_template
 [core]
-	excludesfile = ~/.gitignore_global
+	excludesfile = ~/.gitignore.global
 [rebase]
     autostash = true
 [diff]
@@ -15,13 +15,13 @@
   # Working with branches
   #
   ################################################################################
-
+  pr="!hub pull-request"
   # Get the current branch name (not so useful in itself, but used in
   # other aliases)
   branch-name = "!git rev-parse --abbrev-ref HEAD"
   # Push the current branch to the remote "origin", and set it to track
   # the upstream branch
-  publish = "!git push -u origin $(git branch-name)"
+  publish = "!git push -u origin $(git branch-name) && hub pull-request"
   # Do the same as publish, but force push, as long as nobody else has made changes to the branch
   fpublish = "!git push -u origin $(git branch-name) --force-with-lease"
   # Delete the remote version of the current branch

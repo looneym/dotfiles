@@ -82,6 +82,7 @@ let g:ycm_autoclose_preview_window_after_completion=1
 let $FZF_DEFAULT_COMMAND='find . '
 nnoremap <Leader>o : Files <ENTER> 
 set rtp+=/usr/local/opt/fzf
+set rtp+=~/.fzf
 
 "" nerd tree
 map <Leader>n :NERDTreeToggle<CR>
@@ -101,11 +102,11 @@ noremap <Up> <Nop>
 noremap <Down> <Nop>
 noremap <Left> <Nop>
 noremap <Right> <Nop>
-" cycle between split panes
-noremap - <c-w>W
-noremap = <c-w>W
-nnoremap H <c-w>W
-nnoremap L <c-w>w
+" " cycle between split panes
+" noremap - <c-w>W
+" noremap = <c-w>W
+" nnoremap H <c-w>W
+" nnoremap L <c-w>w
 
 " cycle between tabs
 nnoremap _ :tabp <ENTER>

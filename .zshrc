@@ -11,8 +11,8 @@ source $ZSH/oh-my-zsh.sh
 export TERM=screen-256color
 plugins=(
   git
-  rbenv
-  ruby     
+  gitfast
+  zsh-completions
 )
 autoload -U compinit && compinit
  export KEYTIMEOUT=1
@@ -44,7 +44,7 @@ alias ze='vim ~/.zshrc'
 alias zs='source ~/.zshrc && echo Succesfully reloaded .zshrc! 🎉'
 
 # Git
-alias git="noglob hub"
+function git() { hub $@; }
 alias gb="git branch"
 alias gca="git commit --amend --no-edit"
 alias gcae="git commit --amend"
@@ -95,7 +95,7 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-source /Users/micheallooney/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source $HOME/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # export PS1=$PS1:""
 PS1="
 $PS1 \
@@ -111,3 +111,7 @@ $PS2 \
 
 
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+
+eval "$(intercom-linux-env)"
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+source $(which assume-role)
