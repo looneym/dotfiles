@@ -35,7 +35,7 @@ install_powerline_fonts(){
 symlink_files(){
   touch ~/.transient
   dir=~/dotfiles                    
-  files=".zshrc .vimrc .vim .tmux.conf .gitconfig .gitignore.global"       
+  files=".zshrc .vimrc .vim .tmux.conf .gitconfig .gitignore.global .aliases"       
   for file in $files; do
       echo "Creating symlink to $file in home directory."
       ln -sf $dir/$file ~/$file
@@ -54,6 +54,6 @@ install_fzf
 install_ag
 install_vundle
 install_ycm_deps
-symlink_files
 install_powerline_fonts
 install_syntax_highlighting
+symlink_files
