@@ -89,6 +89,11 @@ alias hustle="cd ~/src/hustle"
 ################################################################################
 
 source $HOME/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+PS1="
+$PS1 \
+
+
+  λ "
 
 eval "$(intercom-linux-env)"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
