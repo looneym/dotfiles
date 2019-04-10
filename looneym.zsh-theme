@@ -71,7 +71,7 @@ prompt_git() {
 
 # Dir: current working directory
 prompt_dir() {
-  prompt_segment blue black '%3~'
+  prompt_segment blue black '%3 🐧  ~'
   # prompt_segment blue black "…${PWD: -30}"
 }
 
@@ -99,4 +99,7 @@ build_prompt() {
   prompt_end
 }
 
-PROMPT='%{%f%b%k%}$(build_prompt) '
+PROMPT="%{%f%b%k%}$(build_prompt) \
+
+
+  λ " 
