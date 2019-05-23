@@ -52,3 +52,9 @@ $PS1 \
 eval "$(intercom-linux-env)"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 source $(which assume-role)
+export ss=~/.ssh
+
+function role {
+  account=$(jq -r 'keys[]' ~/.aws/accounts | peco)
+  assume-role $account team-dev-infra $(get-bastion-otp)
+}

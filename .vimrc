@@ -51,7 +51,7 @@ let vim_markdown_preview_browser='Google Chrome'
 " " vnoremap slr :VtrSendLinesToRunner<CR>
 " " xnoremap slr :VtrSendLinesToRunner<CR>
 " nnoremap rk :VtrKillRunner<CR>
-
+let g:ale_echo_cursor = 0
 colorscheme Tomorrow-Night-Eighties
 let g:airline_theme='tomorrow'
 let g:airline_section_b = ''
@@ -83,10 +83,26 @@ let $FZF_DEFAULT_COMMAND='find . '
 nnoremap <Leader>o : Files <ENTER> 
 set rtp+=/usr/local/opt/fzf
 set rtp+=~/.fzf
+map <Leader>s :Ag<CR>
 
-"" nerd tree
+function! s:getVisualSelection()
+    let [line_start, column_start] = getpos("'<")[1:2]
+    let [line_end, column_end] = getpos("'>")[1:2]
+    let lines = getline(line_start, line_end)
+
+    if len(lines) == 0
+        return ""
+    endif
+
+    let lines[-1] = lines[-1][:column_end - (&selection == "inclusive" ? 1 : 2)]
+    let lines[0] = lines[0][column_start - 1:]
+
+    return join(lines, "\n")
+endfunction
+noremap <leader>f :Ag <C-r>=expand('<cword>')<CR> <CR>
+vnoremap <silent><leader>f <Esc>:Ag! <C-R>=<SID>getVisualSelection()<CR><CR>
+
 map <Leader>n :NERDTreeToggle<CR>
-
 map <Leader>gh :OpenGithub<CR>
 
 """""""""""""""""""""""""""""""""""""""
@@ -102,15 +118,6 @@ noremap <Up> <Nop>
 noremap <Down> <Nop>
 noremap <Left> <Nop>
 noremap <Right> <Nop>
-" " cycle between split panes
-" noremap - <c-w>W
-" noremap = <c-w>W
-" nnoremap H <c-w>W
-" nnoremap L <c-w>w
-
-" cycle between tabs
-nnoremap _ :tabp <ENTER>
-nnoremap + :tabn <ENTER>
 
 " split panes easily
 :nnoremap <Leader>v :vnew<CR>
@@ -150,6 +157,8 @@ nnoremap gsr :so $MYVIMRC<CR>
 
 " clipboard register uses system clipboard
 set clipboard=unnamed
+xnoremap y "+y
+xnoremap Y "+Y
 
 " cursor can be moved anywhere
 set virtualedit=all
@@ -186,6 +195,8 @@ set mouse=a
 set noswapfile
 syntax enable
 inoremap jk <Esc>
+cnoremap jk <Esc>
+vnoremap jk <Esc>
 let g:ale_set_highlights = 0
 filetype plugin indent on 
 xnoremap p pgvy

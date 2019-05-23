@@ -6,7 +6,7 @@ add_alias(){
   echo $a >> ~/.aliases
   echo "Added new alias: $a"
   echo "Reloading .zshrc"
-  zs
+  source ~/.zshrc
 }
 alias aliasadd="add_alias"
 alias lc="history | tail -n 1 | cut -c 8-"
@@ -58,3 +58,15 @@ alias buildkite="cd ~/src/buildkite-test-pipeline/"
 alias hustle="cd ~/src/hustle"
 alias dot="cd ~/dotfiles"
 alias yeet="ping google.ie"
+alias x="chmod +x"
+alias ops='eval $(op signin intercom)'
+alias se="vim ~/.ssh/config"
+alias rmkh="rm ~/.ssh/known_hosts"
+nuke_docker(){ 
+  # Delete all containers
+  docker stop $(docker ps -a -q)
+  docker rm -f $(docker ps -a -q)
+  # Delete all images
+  docker rmi $(docker images -q)
+  docker system prune
+}

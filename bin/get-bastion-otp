@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+BASTION_ITEM_ID=prqrvgcfz5fwvcbjgekcfckxam
+eval "$(op signin intercom)"
+op get totp $BASTION_ITEM_ID
