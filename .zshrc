@@ -47,7 +47,7 @@ PS1="
 $PS1 \
 
 
-  λ "
+ 🐧 λ "
 
 eval "$(intercom-linux-env)"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
