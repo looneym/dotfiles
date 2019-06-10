@@ -49,7 +49,7 @@ $PS1 \
 
  🐧 λ "
 
-eval "$(intercom-linux-env)"
+eval "$(intercom-profile)"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 source $(which assume-role)
 export ss=~/.ssh
