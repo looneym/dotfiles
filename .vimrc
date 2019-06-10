@@ -13,11 +13,10 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.vim/plugged')
-" Plugin 'VundleVim/Vundle.vim'
 Plug 'scrooloose/nerdtree'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-commentary'
-Plug 'Valloric/YouCompleteMe'
 Plug 'tpope/vim-fugitive'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'tpope/vim-rails'
@@ -86,8 +85,6 @@ let g:ycm_autoclose_preview_window_after_completion=1
 "" fuzzy finder
 let $FZF_DEFAULT_COMMAND='find . '
 nnoremap <Leader>o : Files <ENTER> 
-set rtp+=/usr/local/opt/fzf
-set rtp+=~/.fzf
 map <Leader>s :Ag<CR>
 
 function! s:getVisualSelection()
