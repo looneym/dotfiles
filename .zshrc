@@ -42,7 +42,7 @@ source ~/.aliases
 #
 ################################################################################
 
-source $HOME/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source $HOME/.zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 PS1="
 $PS1 \
 
