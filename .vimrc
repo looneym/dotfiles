@@ -37,6 +37,7 @@ Plug 'JamshedVesuna/vim-markdown-preview'
 Plug 'k0kubun/vim-open-github'
 Plug 'MattesGroeger/vim-bookmarks'
 Plug 'Shougo/denite.nvim'
+Plug 'wincent/vim-clipper'
 call plug#end()
 
 """""""""""""""""""""""""""""""""""""""
@@ -63,6 +64,7 @@ let g:airline_section_y = ''
 let g:airline_section_error = ''
 let g:airline_section_warning = ''
 
+call clipper#set_invocation('nc localhost 8377')
 "" rainbow levels
 map <leader>l :RainbowLevelsToggle<cr>
 let g:rainbow_levels = [
@@ -158,9 +160,9 @@ nnoremap ged :e $MYVIMRC<CR>
 nnoremap gsr :so $MYVIMRC<CR>
 
 " clipboard register uses system clipboard
-set clipboard=unnamed
-xnoremap y "+y
-xnoremap Y "+Y
+" set clipboard=unnamed
+" xnoremap y "+y
+" xnoremap Y "+Y
 
 " cursor can be moved anywhere
 set virtualedit=all
