@@ -58,3 +58,6 @@ function role {
   account=$(jq -r 'keys[]' ~/.aws/accounts | peco)
   assume-role $account team-dev-infra $(get-bastion-otp)
 }
+
+eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
+

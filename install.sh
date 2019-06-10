@@ -11,6 +11,17 @@ enable_epel() {
   sudo yum install -y epel-release
 }
 
+install_homebrew() {
+  if [ ! -d /home/linuxbrew/.linuxbrew/Homebrew ]; then
+    echo "installing homebrew"
+    sudo mkdir -p /home/linuxbrew/.linuxbrew
+    sudo chown -R $(whoami):$(whoami) /home/linuxbrew
+    git clone https://github.com/Homebrew/brew /home/linuxbrew/.linuxbrew/Homebrew
+    mkdir /home/linuxbrew/.linuxbrew/bin
+    ln -s ../Homebrew/bin/brew /home/linuxbrew/.linuxbrew/bin
+  fi
+}
+
 install_ag(){
   sudo yum install -y the_silver_searcher 
 }
@@ -58,6 +69,11 @@ install_vim8(){
   fi
 }
 
+install_tmux(){
+  brew install tmux
+}
+
+install_homebrew
 enable_epel
 install_zsh
 install_oh_my_zsh
@@ -67,3 +83,4 @@ install_powerline_fonts
 install_syntax_highlighting
 symlink_files
 install_vim8
+install_tmux
