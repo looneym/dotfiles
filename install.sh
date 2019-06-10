@@ -56,8 +56,8 @@ install_vim8(){
 install_zsh
 install_oh_my_zsh
 install_ctags
-install_fzf
 install_ag
 install_powerline_fonts
 install_syntax_highlighting
 symlink_files
+install_vim8
