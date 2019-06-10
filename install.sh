@@ -6,6 +6,11 @@ install_zsh(){
   sudo zsh install -y zsh 
 }
 
+enable_epel() {
+  sudo amazon-linux-extras enable epel
+  sudo yum install -y epel-release
+}
+
 install_ag(){
   sudo yum install -y the_silver_searcher 
 }
@@ -53,6 +58,7 @@ install_vim8(){
   fi
 }
 
+enable_epel
 install_zsh
 install_oh_my_zsh
 install_ctags
