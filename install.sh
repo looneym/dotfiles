@@ -3,7 +3,7 @@ install_ctags(){
 }
 
 install_zsh(){
-  sudo zsh install -y zsh 
+  sudo yum install -y zsh 
 }
 
 enable_epel() {
