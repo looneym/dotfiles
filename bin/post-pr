@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+
+DEV_INFRA_PR_CHANNEl="C83AJHTEH"
+CHANNEL=$DEV_INFRA_PR_CHANNEl
+
+read_pr_link() {
+  while read line; do
+    PR_LINK=$(echo "$line" | grep -Po '^https.*pull\/(\d*)')
+  done <"${1:-/dev/stdin}"
+
+  if [ -z "$PR_LINK" ]; then
+    echo "Failed to post PR to slack. No link found in input"
+    exit 1
+  fi
+}
+
+read_pr_title() {
+  PR_TITLE=$(cat .git/COMMIT_EDITMSG | head -n 1)
+}
+
+post_pr() {
+  data="{\"as_user\":\"true\", \"channel\":\"$CHANNEL\",\"text\":\"pls review dis\",\"attachments\": [{\"text\": \"$PR_TITLE \n  $PR_LINK \"} ]}"
+  curl -X POST -H "Authorization: Bearer $SLACK_TOKEN" \
+    -H 'Content-type: application/json' \
+    -H 'as-user: true' \
+    --data "$data" \
+    https://slack.com/api/chat.postMessage
+}
+
+read_pr_link
+read_pr_title
+post_pr
