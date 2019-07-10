@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+
+TEAM_NAME="team-dev-infra"
+
+read_pr_link() {
+  pr_number=$(hub pr list -h $(git branch-name) | awk '{print $1}' | sed s/\#//)
+  if ls -la | grep --quiet .gitignore; then
+    repo=$(basename "$PWD")
+  else
+    echo "Not in root of repo"
+    exit 1
+  fi
+  PR_LINK="https://github.com/intercom/$repo/pull/$pr_number"
+}
+
+post_pr() {
+  GITHUB_TOKEN=$(cat ~/.config/hub | grep token | awk '{print $2}')
+  data="{\"pull_request\":{\"pull_request_url\":\"$PR_LINK\", \"team_name\":\"$TEAM_NAME\"}}"
+  echo $data
+  curl -X POST --header "Authorization: Token token=$GITHUB_TOKEN" \
+    --data "$data" \
+    http://prfeed.internal.intercom.io/api/pull_requests
+}
+
+read_pr_link
+post_pr

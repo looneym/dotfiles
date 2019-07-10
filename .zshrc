@@ -6,6 +6,7 @@
 
 export ZSH=~/.oh-my-zsh
 ZSH_THEME="looneym"
+# ZSH_THEME="robbyrussell"
 source $ZSH/oh-my-zsh.sh
 export TERM=screen-256color
 plugins=(
@@ -54,10 +55,14 @@ eval "$(intercom-profile)"
 source $(which assume-role)
 export ss=~/.ssh
 
-function role {
-  account=$(jq -r 'keys[]' ~/.aws/accounts | peco)
-  assume-role $account team-dev-infra $(get-bastion-otp)
-}
 
-eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
+# eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
 
+export LANG="en_US.UTF-8"
+export LC_COLLATE="en_US.UTF-8"
+export LC_CTYPE="en_US.UTF-8"
+export LC_MESSAGES="en_US.UTF-8"
+export LC_MONETARY="en_US.UTF-8"
+export LC_NUMERIC="en_US.UTF-8"
+export LC_TIME="en_US.UTF-8"
+export LC_ALL="en_US.UTF-8"
