@@ -1,3 +1,5 @@
+set -euo pipefail
+
 enable_epel() {
   sudo amazon-linux-extras enable epel
   sudo yum install -y epel-release
@@ -36,6 +38,7 @@ install_brew_packages() {
   "ctags"
   "ag"
   "python3"
+  "hub"
   )
  brew install "${brew_packages[@]}"
 }
