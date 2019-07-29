@@ -1,24 +1,24 @@
-Color key:
-  #2d2d2d Background
-  #393939 Current Line
-  #515151 Selection
-  #cccccc Foreground
-  #999999 Comment
-  #f2777a Red
-  #f99157 Orange
-  #ffcc66 Yellow
-  #99cc99 Green
-  #66cccc Aqua
-  #6699cc Blue
-  #cc99cc Purple
- setw -g pane-border-status bottom
- setw -g pane-border-format '─'
+#Color key:
+#  #2d2d2d Background
+#  #393939 Current Line
+#  #515151 Selection
+#  #cccccc Foreground
+#  #999999 Comment
+#  #f2777a Red
+#  #f99157 Orange
+#  #ffcc66 Yellow
+#  #99cc99 Green
+#  #66cccc Aqua
+#  #6699cc Blue
+#  #cc99cc Purple
+
+setw -g pane-border-status bottom
+setw -g pane-border-format '─'
 
 ## set status bar
 set -g status-bg default
 set -g status-fg colour241
-setw -g window-status-current-bg "#393939"
-setw -g window-status-current-fg "#6699cc"
+setw -g window-status-current-style bg="#393939",fg="#6699cc",dim
 
 ## highlight active window
 setw -g window-style 'bg=#393939'
@@ -26,51 +26,33 @@ setw -g window-active-style 'bg=#2d2d2d'
 setw -g pane-active-border-style ''
 
 ## highlight activity in status bar
-setw -g window-status-activity-fg "#66cccc"
-setw -g window-status-activity-bg "#2d2d2d"
+setw -g window-status-activity-style bg="#2d2d2d",fg="#66cccc"
 
 ## pane border and colors
-set -g pane-active-border-bg default
-set -g pane-active-border-fg "#515151"
-set -g pane-border-bg default
-set -g pane-border-fg "#515151"
+setw -g pane-active-border-style bg=default,fg="#515151"
+setw -g pane-border-style bg=default,fg="#515151"
 
 set -g clock-mode-colour "#6699cc"
 set -g clock-mode-style 24
 
-set -g message-bg "#66cccc"
-set -g message-fg "#000000"
+setw -g message-style bg="#2d2d2d",fg="#f99157"
+setw -g message-command-style bg="#66cccc",fg="#000000"
+# setw -g message-command-style bg="#2d2d2d",fg="#cc99cc"
 
-set -g message-command-bg "#66cccc"
-set -g message-command-fg "#000000"
-
-# message bar or "prompt"
-set -g message-bg "#2d2d2d"
-set -g message-fg "#cc99cc"
-
-# set -g mode-bg "#2d2d2d"
-# set -g mode-fg "#f99157"
-
-set -g mode-fg "#2d2d2d"
-set -g mode-bg "#f99157"
+setw -g mode-style bg="#2d2d2d",fg="#f99157"
 
 # right side of status bar holds "[host name] (date time)"
 set -g status-right-length 100
-set -g status-right-fg black
-set -g status-right-attr bold
+set -g status-right-style fg=black
 set -g status-right '#[fg=#6699cc,bg=#2d2d2d] %H:%M '
 
 # make background window look like white tab
-set-window-option -g window-status-bg default
-set-window-option -g window-status-fg white
-set-window-option -g window-status-attr none
+set-window-option -g window-status-style bg=default,fg=white
 set-window-option -g window-status-format '#[fg=#999999,bg=colour235] #I #[fg=#999999,bg=#2d2d2d] #W #[default]'
 
 # make foreground window look like bold yellow foreground tab
-set-window-option -g window-status-current-attr none
 set-window-option -g window-status-current-format '#[fg=#6699cc,bg=#2d2d2d] #I #[fg=#cccccc,bg=#6699cc] #W #[default]'
 
 # active terminal yellow border, non-active white
-set -g pane-border-bg default
-set -g pane-border-fg "#999999"
-set -g pane-active-border-fg "#999999"
+set -g pane-border-style bg=default,fg="#999999"
+set -g pane-active-border-style fg="#999999"
