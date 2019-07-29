@@ -1,14 +1,18 @@
-install_ctags(){
-  sudo yum install -y ctags
-}
-
-install_zsh(){
-  sudo yum install -y zsh 
-}
-
 enable_epel() {
   sudo amazon-linux-extras enable epel
   sudo yum install -y epel-release
+}
+
+install_development_tools() {
+ sudo yum groupinstall -y  "Development tools"
+}
+
+install_yum_packages() {
+  # I don't need any yum packages righ now but I'm keeping this here to make it easy to add them later if I need to
+  declare -a yum_packages=(
+  "cowsay"
+  )
+ sudo yum install -y  "${yum_packages[@]}"
 }
 
 install_homebrew() {
@@ -22,8 +26,18 @@ install_homebrew() {
   fi
 }
 
-install_ag(){
-  sudo yum install -y the_silver_searcher 
+install_brew_packages() {
+  declare -a brew_packages=(
+  "zsh"
+  "tmux"
+  "vim"
+  "openssh"
+  "shfmt"
+  "ctags"
+  "ag"
+  "python3"
+  )
+ brew install "${brew_packages[@]}"
 }
 
 install_oh_my_zsh(){
@@ -41,26 +55,26 @@ install_powerline_fonts(){
   rm -rf /tmp/fonts
 }
 
-symlink_files(){
+create_symlinks(){
   touch ~/.transient
-  dir=~/dotfiles                    
-  files=".zshrc .vimrc .tmux.conf .gitconfig .gitignore.global .aliases .git_template"       
-  for file in $files; do
-      echo "Creating symlink to $file in home directory."
-      ln -sf $dir/$file ~/$file
+  paths=".zshrc .vimrc .tmux.conf .gitconfig .gitignore.global .aliases .git_template"       
+  for path in $paths; do
+      echo "Creating symlink to $path in home directory."
+      ln -sf ~/dotfiles/$path ~/$path
   done
   ln -sf ~/dotfiles/looneym.zsh-theme ~/.oh-my-zsh/themes/looneym.zsh-theme
 }
 
-install_syntax_highlighting(){
+install_zsh_syntax_highlighting(){
   git clone https://github.com/zsh-users/zsh-syntax-highlighting.git  ~/.zsh-syntax-highlighting
 }
 
+# I don't like this but it's hard to find a vim package which has all the things I want
+# Later I should create my own brew package
 install_vim8(){
   if vim --version | grep "Vi IMproved 8." > /dev/null 2>&1 ; then
     echo "Vi 8 is already installed"
   else
-    sudo yum -y groupinstall "Development Tools"
     sudo yum -y install ncurses-devel git-core
     git clone https://github.com/vim/vim /tmp/vim
     ./configure --prefix=/usr --with-features=huge --enable-multibyte --with-python-config-dir=/usr/lib/python2.7/config --enable-pythoninterp=yes
@@ -69,18 +83,14 @@ install_vim8(){
   fi
 }
 
-install_tmux(){
-  brew install tmux
-}
-
-install_homebrew
 enable_epel
-install_zsh
+install_development_tools
+install_yum_packages
+install_homebrew
+install_brew_packages
 install_oh_my_zsh
-install_ctags
-install_ag
 install_powerline_fonts
-install_syntax_highlighting
-symlink_files
-install_vim8
-install_tmux
+install_zsh_syntax_highlighting
+create_symlinks
+# Seeing if I can get by with the brew version for now
+# install_vim8

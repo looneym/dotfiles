@@ -50,7 +50,6 @@ $PS1 \
 
  🐧 λ "
 
-eval "$(intercom-profile)"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 source $(which assume-role)
 export ss=~/.ssh
@@ -66,3 +65,8 @@ export LC_MONETARY="en_US.UTF-8"
 export LC_NUMERIC="en_US.UTF-8"
 export LC_TIME="en_US.UTF-8"
 export LC_ALL="en_US.UTF-8"
+
+
+eval "$(intercom-profile)"
+# This needs to be at the start of the path so that it finds python there and not from pyenv
+export PATH=/home/linuxbrew/.linuxbrew/bin:$PATH
