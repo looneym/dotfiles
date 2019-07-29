@@ -69,7 +69,13 @@ create_symlinks(){
 }
 
 install_zsh_syntax_highlighting(){
-  git clone https://github.com/zsh-users/zsh-syntax-highlighting.git  ~/.zsh-syntax-highlighting
+  if [ ! -d ~/.zsh-syntax-highlighting ]; then
+    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git  ~/.zsh-syntax-highlighting
+  fi
+}
+
+install_tpm() {
+  git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 }
 
 # I don't like this but it's hard to find a vim package which has all the things I want
@@ -86,6 +92,7 @@ install_vim8(){
   fi
 }
 
+
 enable_epel
 install_development_tools
 install_yum_packages
@@ -95,5 +102,6 @@ install_oh_my_zsh
 install_powerline_fonts
 install_zsh_syntax_highlighting
 create_symlinks
+install_tpm
 # Seeing if I can get by with the brew version for now
 # install_vim8
