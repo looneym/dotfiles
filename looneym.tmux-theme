@@ -22,8 +22,9 @@ setw -g window-status-current-style bg="#393939",fg="#6699cc",dim
 
 ## highlight active window
 setw -g window-style 'bg=#393939'
-setw -g window-active-style 'bg=#2d2d2d'
+set -g window-active-style 'fg=default,bg=colour235'
 setw -g pane-active-border-style ''
+
 
 ## highlight activity in status bar
 setw -g window-status-activity-style bg="#2d2d2d",fg="#66cccc"
