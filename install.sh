@@ -39,6 +39,7 @@ install_brew_packages() {
   "ag"
   "python3"
   "hub"
+  "peco"
   )
  brew install "${brew_packages[@]}"
 }
