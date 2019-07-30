@@ -160,3 +160,13 @@ function role() {
   account=$(jq -r 'keys[]' ~/.aws/accounts | peco)
   assume-role $account team-dev-infra $(botp)
 }
+
+symlinks_help() {
+  cat <<EndOfMessage
+  paths=".zshrc .vimrc .tmux.conf .gitconfig .gitignore.global .aliases .git_template"
+  for path in \$paths; do
+    echo "Creating symlink to \$path in home directory."
+    ln -sf ~/dotfiles/\$path ~/\$path
+  done
+EndOfMessage
+}
