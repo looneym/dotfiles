@@ -36,6 +36,8 @@
   # out of sync
   recreate = "!f() { [[ -n $@ ]] && git checkout \"$@\" && git unpublish && git checkout master && git branch -D \"$@\" && git checkout -b \"$@\" && git publish; }; f"
 
+  vim ="!/home/linuxbrew/.linuxbrew/bin/vim -c 'let NERDTreeShowHidden=1' -c ':NERDTreeToggle' -c ':Gstatus' -c ':NERDTreeToggle' -c 'only'"
+
   ################################################################################
   #
   # Working with files
