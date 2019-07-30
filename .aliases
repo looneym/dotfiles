@@ -100,12 +100,12 @@ dot() {
   vim -c ':cd ~/dotfiles' -c 'let NERDTreeShowHidden=1' -c ':NERDTreeToggle'
 }
 
-v() {
+re() {
   r
   vim -c ':NERDTreeToggle'
 }
 
-vg() {
+rcd() {
   repo=$(ls ~/src/ | peco)
   vim -c ":cd ~/src/$repo" -c 'let NERDTreeShowHidden=1' -c ':NERDTreeToggle' -c ':Gstatus' -c ':NERDTreeToggle'
 }
