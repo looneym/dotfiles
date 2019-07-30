@@ -72,7 +72,6 @@ nuke_docker() {
   docker rmi $(docker images -q)
   docker system prune
 }
-alias stack="cd ~/.pilot/stack/services"
 alias integ="cd ~/src/intercom-integrations"
 clip() {
   echo $1 | nc localhost 8377
@@ -88,24 +87,15 @@ gsha() {
   glo $1 | peco | awk '{print $1}'
 }
 
-r() {
-  cd ~/src/$(ls ~/src/ | peco)
-}
-
 man() {
   vim -c "runtime! ftplugin/man.vim" -c "let g:ft_man_open_mode = 'tab'" -c ":Man $1" -c "tabonly"
 }
 
-dot() {
-  vim -c ':cd ~/dotfiles' -c 'let NERDTreeShowHidden=1' -c ':NERDTreeToggle'
+rcd() {
+  cd ~/src/$(ls ~/src/ | peco)
 }
 
 re() {
-  r
-  vim -c ':NERDTreeToggle'
-}
-
-rcd() {
   repo=$(ls ~/src/ | peco)
   vim -c ":cd ~/src/$repo" -c 'let NERDTreeShowHidden=1' -c ':NERDTreeToggle' -c ':Gstatus' -c ':NERDTreeToggle'
 }
