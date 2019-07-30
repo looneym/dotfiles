@@ -61,10 +61,10 @@ install_powerline_fonts(){
 
 create_symlinks(){
   touch ~/.transient
-  paths=".zshrc .vimrc .tmux.conf .gitconfig .gitignore.global .aliases .git_template"       
+  paths="zshrc vimrc tmux.conf gitconfig gitignore.global aliases git_template"       
   for path in $paths; do
       echo "Creating symlink to $path in home directory."
-      ln -sf ~/dotfiles/$path ~/$path
+      ln -sf ~/dotfiles/$path ~/.$path
   done
   ln -sf ~/dotfiles/looneym.zsh-theme ~/.oh-my-zsh/themes/looneym.zsh-theme
 }
