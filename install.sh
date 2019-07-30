@@ -75,7 +75,10 @@ install_zsh_syntax_highlighting(){
 }
 
 install_tpm() {
-  git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+
+  if [ ! -d ~/.tmux/plugins/tpm ]; then
+    git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+  fi
 }
 
 # I don't like this but it's hard to find a vim package which has all the things I want
