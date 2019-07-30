@@ -14,7 +14,6 @@ endif
  
 call plug#begin('~/.vim/plugged')
 Plug 'MattesGroeger/vim-bookmarks'
-Plug 'TheJefe/vim-prreview'
 Plug 'chriskempson/tomorrow-theme', {'rtp': 'vim/'}
 
 Plug 'christoomey/vim-tmux-navigator'
