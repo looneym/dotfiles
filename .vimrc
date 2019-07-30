@@ -16,7 +16,6 @@ call plug#begin('~/.vim/plugged')
 Plug 'MattesGroeger/vim-bookmarks'
 Plug 'TheJefe/vim-prreview'
 Plug 'chriskempson/tomorrow-theme', {'rtp': 'vim/'}
-  colorscheme Tomorrow-Night-Eighties
 
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'ctrlpvim/ctrlp.vim'
@@ -79,7 +78,6 @@ Plug 'w0rp/ale'
   let g:ale_set_highlights = 1
 
 Plug 'wincent/vim-clipper'
-  call clipper#set_invocation('nc localhost 8377')
 
 Plug 'ycm-core/YouCompleteMe', { 'dir': '~/.vim/plugged/YouCompleteMe', 'do': 'python3  install.py --clang-completer' }
   let g:ycm_autoclose_preview_window_after_completion=1
@@ -170,6 +168,19 @@ highlight DiffDelete cterm=bold ctermfg=10 ctermbg=17 gui=none guifg=bg guibg=Re
 highlight DiffChange cterm=bold ctermfg=10 ctermbg=17 gui=none guifg=bg guibg=Red
 highlight DiffText   cterm=bold ctermfg=10 ctermbg=88 gui=none guifg=bg guibg=Red
 
+
+"""""""""""""""""""""""""""""""""""""""
+"
+"
+"      PLUGIN CONFIGURATION
+"
+"
+"""""""""""""""""""""""""""""""""""""""
+" some plugins cannot be configured inside the Plug block
+
+colorscheme Tomorrow-Night-Eighties
+call clipper#set_invocation('nc localhost 8377')
+
 """""""""""""""""""""""""""""""""""""""
 "
 "
@@ -211,7 +222,6 @@ set ruler
 set number
 set cursorline
 set cursorcolumn
-
 
 " misc
 set nocompatible
