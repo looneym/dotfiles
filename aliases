@@ -1,15 +1,23 @@
 #!/bin/bash
 
 # meta
-alias ae="vim ~/.aliases"
-alias aliasls="cat ~/.aliases | grep ^alias"
-add_alias() {
-  a="alias $1=\"$(lc)\""
-  echo $a >>~/.aliases
-  echo "Added new alias: $a"
+ar() {
   echo "Reloading .zshrc"
   source ~/.zshrc
 }
+
+ae() {
+  vim ~/.aliases
+  ar
+}
+
+aa() {
+  a="alias $1=\"$(lc)\""
+  echo $a >>~/.aliases
+  echo "Added new alias: $a"
+  ar
+}
+
 alias aliasadd="add_alias"
 alias lc="history | tail -n 1 | cut -c 8-"
 
@@ -97,7 +105,7 @@ rcd() {
 
 re() {
   repo=$(ls ~/src/ | peco)
-  vim -c ":cd ~/src/$repo" -c 'let NERDTreeShowHidden=1' -c ':NERDTreeToggle' -c ':Gstatus' -c ':NERDTreeToggle'
+  vim -c ":cd ~/src/$repo" -c ':NERDTreeToggle'
 }
 
 mkscript() {

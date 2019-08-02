@@ -218,7 +218,8 @@ set virtualedit=all
 
 " visual aids for programming
 set ruler
-set number
+" set number
+set number relativenumber
 
 " misc
 set nocompatible

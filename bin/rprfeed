@@ -1,0 +1,17 @@
+#!/usr/bin/env ruby
+
+TEAM_NAME="team-dev-infra"
+GITHUB_TOKEN=%x( cat ~/.config/hub | grep token | awk '{print $2}')
+
+def read_pr_link
+   %x( hub pr list -h $(git branch-name) | awk '{print $1}' | sed s/\#//)
+end
+
+def post_pr
+#   curl -X POST --header "Authorization: Token token=$GITHUB_TOKEN" \
+#     --data "$(generate_post_data)" \
+#     http://pull-request-feed.test/api/pull_requests
+end
+
+read_pr_link
+# post_pr
