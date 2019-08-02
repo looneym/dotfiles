@@ -219,8 +219,6 @@ set virtualedit=all
 " visual aids for programming
 set ruler
 set number
-set cursorline
-set cursorcolumn
 
 " misc
 set nocompatible
