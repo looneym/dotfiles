@@ -15,9 +15,10 @@ read_pr_link() {
 
 post_pr() {
   GITHUB_TOKEN=$(cat ~/.config/hub | grep token | awk '{print $2}')
-  data="{\"pull_request\":{\"pull_request_url\":\"$PR_LINK\", \"team_name\":\"$TEAM_NAME\"}}"
-  echo $data
+  data="{\"pull_request_url\":\"$PR_LINK\", \"team_name\":\"$TEAM_NAME\"}"
+  echo $data | jq
   curl -X POST --header "Authorization: Token token=$GITHUB_TOKEN" \
+    --header "Content-Type: application/json" \
     --data "$data" \
     http://prfeed.internal.intercom.io/api/pull_requests
 }
