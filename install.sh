@@ -41,6 +41,7 @@ install_brew_packages() {
   "hub"
   "peco"
   "entr"
+  "cmake"
   )
  brew install "${brew_packages[@]}"
 }
