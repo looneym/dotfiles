@@ -40,6 +40,7 @@ install_brew_packages() {
   "python3"
   "hub"
   "peco"
+  "entr"
   )
  brew install "${brew_packages[@]}"
 }

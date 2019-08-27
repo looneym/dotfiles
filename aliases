@@ -17,13 +17,24 @@ aa() {
   echo "Added new alias: $a"
   ar
 }
-
 alias aliasadd="add_alias"
 alias lc="history | tail -n 1 | cut -c 8-"
 
 alias te='vim ~/.transient'
 alias ze='vim ~/.zshrc'
+alias se="vim ~/.ssh/config"
 alias zs='source ~/.zshrc && echo Succesfully reloaded .zshrc! 🎉'
+
+# What's my ip?
+alias eip='curl ipinfo.io/ip'
+alias iip="ipconfig getifaddr en0"
+
+alias src="cd ~/src"
+alias x="chmod +x"
+alias ops='eval $(op signin intercom)'
+alias wideboi="tmux new -A -s wideboi"
+alias skinnyboi="tmux new -A -s skinnyboi"
+alias p="peco"
 
 # Git
 function git() { hub $@; }
@@ -41,80 +52,10 @@ alias gc="git commit -m "
 alias gpub="git publish | grep 'pull/new' | awk '{ print $2 }' | pbcopy && echo 'Link copied to clipboard'"
 alias gzoom="gco master && git pull"
 alias gzoom!="git stash && gco master && git pull"
-alias yeet="git add . && git commit --amend --no-edit && git push --force-with-lease"
-alias "git publish"="ls"
-
-# What's my ip?
-alias eip='curl ipinfo.io/ip'
-alias iip="ipconfig getifaddr en0"
-
-alias ic="ruby ~/src/intercom/bin/intercom-cli"
-# This must be loaded last
-# plugins=( zsh-syntax-highlighting )
-# echo "source ${(q-)PWD}/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" >> ${ZDOTDIR:-$HOME}/.zshrc
-alias scr="vim ~/notes/scratch"
-alias src="cd ~/src"
-alias tmp="cd ~/tmp"
-
-# alias for dev version of bundler
-alias dbundle="/Users/micheallooney/src/bundler/bin/bundle"
-
-# alias v="vim -"
-alias up="cd $(pwd | awk -F/ '{project_root=""; for(i=2;i<=5;i++){project_root=project_root"/"$i}; print project_root}')"
+# TODO: move this to gitconfig
 alias noop="git checkout master && git pull && git checkout -b ml/noop && git commit --allow-empty -m \"noop\""
 
-alias intercom="cd ~/src/intercom"
-alias embercom="cd ~/src/embercom"
-alias muster="cd ~/src/muster"
-alias buildkite="cd ~/src/buildkite-test-pipeline/"
-alias hustle="cd ~/src/hustle"
-alias x="chmod +x"
-alias ops='eval $(op signin intercom)'
-alias se="vim ~/.ssh/config"
-alias rmkh="rm ~/.ssh/known_hosts"
-nuke_docker() {
-  # Delete all containers
-  docker stop $(docker ps -a -q)
-  docker rm -f $(docker ps -a -q)
-  # Delete all images
-  docker rmi $(docker images -q)
-  docker system prune
-}
-alias integ="cd ~/src/intercom-integrations"
-clip() {
-  echo $1 | nc localhost 8377
-}
-alias td="tmux detach"
-alias historynl="history | cut -c 8-"
-
-dimg() {
-  docker images "*$1*" --format "{{.ID}}"
-}
-
-gsha() {
-  glo $1 | peco | awk '{print $1}'
-}
-
-man() {
-  vim -c "runtime! ftplugin/man.vim" -c "let g:ft_man_open_mode = 'tab'" -c ":Man $1" -c "tabonly"
-}
-
-rcd() {
-  cd ~/src/$(ls ~/src/ | peco)
-}
-
-re() {
-  repo=$(ls ~/src/ | peco)
-  vim -c ":cd ~/src/$repo" -c ':NERDTreeToggle'
-}
-
-mkscript() {
-  script=$1
-  touch $script
-  echo "#!/usr/bin/env bash" >$script
-  chmod +x $script
-}
-
+# Manage PRs
 cmsg() {
   cat .git/COMMIT_EDITMSG | grep -v '^#'
 }
@@ -131,15 +72,42 @@ prls() {
   hub pr list -h $(git branch-name)
 }
 
-# pdo(){
-#   path=$1
-#   command=$2
-#   for dir in $(ls $path)
-#   do
-#       ( cd "$dir" && $command )
-#   done
-# }
-alias p="pilot"
+# Docker
+nuke_docker() {
+  # Delete all containers
+  docker stop $(docker ps -a -q)
+  docker rm -f $(docker ps -a -q)
+  # Delete all images
+  docker rmi $(docker images -q)
+  docker system prune
+}
+
+ds() {
+  # TODO
+  # - override entrypoint?
+  if [[ -z "$1" ]]; then
+    shell="/bin/bash"
+  else
+    shell="/bin/$1"
+  fi
+
+  artifact=$(echo "containers\nimages" | peco)
+
+  if [[ "$artifact" == "containers" ]]; then
+    docker exec -it $(docker ps | peco | awk '{print $1}') "$shell"
+  elif [[ "$artifact" == "images" ]]; then
+    docker run -it $(docker images | peco | awk '{print $3}') "$shell"
+  fi
+}
+
+dimg() {
+  docker images "*$1*" --format "{{.ID}}"
+}
+
+# Clipboard
+clip() {
+  echo $1 | nc localhost 8377
+}
 
 tc() {
   input=""
@@ -148,15 +116,37 @@ tc() {
   echo $input | nc localhost 8377
 }
 
-home() {
-  echo
-  cd $HOME
-  clear
+gsha() {
+  glo $1 | peco | awk '{print $1}'
+}
+
+man() {
+  vim -c "runtime! ftplugin/man.vim" -c "let g:ft_man_open_mode = 'tab'" -c ":Man $1" -c "tabonly"
+}
+
+rcd() {
+  cd ~/src/$(ls ~/src/ | peco)
+}
+
+re() {
+  cd ~/src/$(ls ~/src/ | peco)
+  vim -c ':NERDTreeToggle'
+}
+
+mkscript() {
+  script=$1
+  touch $script
+  echo " #!/usr/bin/env bash" >$script
+  chmod +x $script
 }
 
 function role() {
   account=$(jq -r 'keys[]' ~/.aws/accounts | peco)
   assume-role $account team-dev-infra $(botp)
+}
+
+rr() {
+  fc "$(history | sort -rn | peco | awk '{print $1}')"
 }
 
 symlinks_help() {
@@ -167,4 +157,8 @@ symlinks_help() {
     ln -sf ~/dotfiles/\$path ~/\$path
   done
 EndOfMessage
+}
+
+col() {
+  cut -d " " -f$1
 }

@@ -44,28 +44,20 @@ source ~/.aliases
 ################################################################################
 
 source $HOME/.zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+if  [[ $(uname) -eq "Linux" ]] 
+then
 PS1="
 $PS1 \
 
 
  🐧 λ "
+fi
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 source $(which assume-role)
-export ss=~/.ssh
 
-
+# Uncomment when not on a work machine
 # eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
-
-export LANG="en_US.UTF-8"
-export LC_COLLATE="en_US.UTF-8"
-export LC_CTYPE="en_US.UTF-8"
-export LC_MESSAGES="en_US.UTF-8"
-export LC_MONETARY="en_US.UTF-8"
-export LC_NUMERIC="en_US.UTF-8"
-export LC_TIME="en_US.UTF-8"
-export LC_ALL="en_US.UTF-8"
-
 
 eval "$(intercom-profile)"
 # This needs to be at the start of the path so that it finds python there and not from pyenv

@@ -4,7 +4,7 @@ TEAM_NAME="team-dev-infra"
 
 read_pr_link() {
   pr_number=$(hub pr list -h $(git branch-name) | awk '{print $1}' | sed s/\#//)
-  if ls -la | grep --quiet .gitignore; then
+  if ls -la | grep --quiet .git; then
     repo=$(basename "$PWD")
   else
     echo "Not in root of repo"
