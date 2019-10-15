@@ -17,6 +17,21 @@ aa() {
   echo "Added new alias: $a"
   ar
 }
+
+sa() {
+  script_name=$1
+  script_path=$HOME/dotfiles/bin/$script_name
+  script_contents=$(lc)
+
+  echo "#!/usr/bin/env bash" >$script_path
+  chmod +x $script_path
+  echo $script_contents >>$script_path
+
+  echo "Added new script: $script_name"
+  echo
+  cat $script_path
+}
+
 alias aliasadd="add_alias"
 alias lc="history | tail -n 1 | cut -c 8-"
 
@@ -32,11 +47,12 @@ alias iip="ipconfig getifaddr en0"
 alias src="cd ~/src"
 alias x="chmod +x"
 alias ops='eval $(op signin intercom)'
-alias wideboi="tmux new -A -s wideboi"
-alias skinnyboi="tmux new -A -s skinnyboi"
+alias hax="tmux new -A -s HAX"
 alias p="peco"
+alias h="cd ~"
 
 # Git
+unalias g
 function git() { hub $@; }
 alias gb="git branch"
 alias gca="git commit --amend --no-edit"
@@ -100,8 +116,13 @@ ds() {
   fi
 }
 
-dimg() {
-  docker images "*$1*" --format "{{.ID}}"
+did() {
+  artifact=$(echo "containers\nimages" | peco)
+  if [[ "$artifact" == "containers" ]]; then
+    docker ps | peco | awk '{print $1}'
+  elif [[ "$artifact" == "images" ]]; then
+    docker images | peco | awk '{print $1}'
+  fi
 }
 
 # Clipboard
@@ -124,25 +145,24 @@ man() {
   vim -c "runtime! ftplugin/man.vim" -c "let g:ft_man_open_mode = 'tab'" -c ":Man $1" -c "tabonly"
 }
 
-rcd() {
+g() {
   cd ~/src/$(ls ~/src/ | peco)
 }
 
-re() {
-  cd ~/src/$(ls ~/src/ | peco)
+v() {
   vim -c ':NERDTreeToggle'
 }
 
 mkscript() {
   script=$1
   touch $script
-  echo " #!/usr/bin/env bash" >$script
+  echo "#!/usr/bin/env bash" >$script
   chmod +x $script
 }
 
 function role() {
-  account=$(jq -r 'keys[]' ~/.aws/accounts | peco)
-  assume-role $account team-dev-infra $(botp)
+  account=$(jq -r 'keys[]' ~/.aws/accounts | fzf)
+  assume-role $account team-cloud $(botp)
 }
 
 rr() {

@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-TEAM_NAME="team-dev-infra"
-
 read_pr_link() {
   pr_number=$(hub pr list -h $(git branch-name) | awk '{print $1}' | sed s/\#//)
   if ls -la | grep --quiet .git; then
@@ -22,6 +20,12 @@ post_pr() {
     --data "$data" \
     http://prfeed.internal.intercom.io/api/pull_requests
 }
+
+if [ -n "$1" ]; then
+  TEAM_NAME="$1"
+else
+  TEAM_NAME="team-cloud"
+fi
 
 read_pr_link
 post_pr

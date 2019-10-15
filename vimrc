@@ -32,6 +32,10 @@ Plug 'lfv89/vim-interestingwords'
 Plug 'majutsushi/tagbar'
 Plug 'mileszs/ack.vim'
 Plug 'roxma/vim-tmux-clipboard'
+Plug 'vimwiki/vimwiki'
+let g:vimwiki_list = [{'path': '~/vimwiki/',
+                      \ 'syntax': 'markdown', 'ext': '.md'}]
+
 Plug 'scrooloose/nerdtree'
   map <Leader>n :NERDTreeToggle<CR>
 
@@ -51,8 +55,9 @@ Plug 'tmux-plugins/vim-tmux-focus-events'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
   noremap fu :h fugitive-mappings<cr>
-  map <leader>g :Git!
+  map <leader>G :Git! 
   map <Leader>gs :Gstatus<CR>
+  map <Leader>gy :Git! yeet
 
 Plug 'tpope/vim-rails'
 Plug 'tpope/vim-tbone'
@@ -77,9 +82,19 @@ Plug 'w0rp/ale'
   let g:ale_set_highlights = 1
 
 Plug 'wincent/vim-clipper'
+Plug 'mhinz/vim-signify'
+Plug 'ruanyl/vim-gh-line'
+let g:gh_open_command = 'fn() { echo "$@" | nc 10.0.0.2 8377; }; fn '
+
+
 
 Plug 'ycm-core/YouCompleteMe', { 'dir': '~/.vim/plugged/YouCompleteMe', 'do': 'python3  install.py --clang-completer' }
   let g:ycm_autoclose_preview_window_after_completion=1
+
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
+  let g:mkdp_port = '1337'
+Plug 'ferrine/md-img-paste.vim'
+
 call plug#end()
 
 """"""""""""""""""""""""""""""""""""""
@@ -178,7 +193,7 @@ highlight DiffText   cterm=bold ctermfg=10 ctermbg=88 gui=none guifg=bg guibg=Re
 " some plugins cannot be configured inside the Plug block
 
 colorscheme Tomorrow-Night-Eighties
-call clipper#set_invocation('nc localhost 8377')
+call clipper#set_invocation('nc 10.0.0.2 8377')
 
 """""""""""""""""""""""""""""""""""""""
 "
@@ -234,3 +249,7 @@ nnoremap <leader>w :w<CR>
 nnoremap <leader>q :q<CR>
 nnoremap <leader>Q :q!<CR>
 nnoremap bg :sus<CR>
+nnoremap <leader>h :let @/='\<<C-R>=expand("<cword>")<CR>\>'<CR>:set hls<CR>
+nnoremap <leader>H :nohl<CR>
+
+

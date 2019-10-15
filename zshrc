@@ -27,6 +27,7 @@ export EDITOR=vim
 
 export LC_CTYPE=en_US.UTF-8
 export LANG=en_US.UTF-8
+export PAGER="vimpager" 
 
 ################################################################################
 #
@@ -44,6 +45,7 @@ source ~/.aliases
 ################################################################################
 
 source $HOME/.zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source $HOME/.oh-my-zsh/custom/plugins/zsh-autosuggestion/zsh-autosuggestions.zsh
 if  [[ $(uname) -eq "Linux" ]] 
 then
 PS1="
@@ -59,6 +61,7 @@ source $(which assume-role)
 # Uncomment when not on a work machine
 # eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
 
-eval "$(intercom-profile)"
 # This needs to be at the start of the path so that it finds python there and not from pyenv
 export PATH=/home/linuxbrew/.linuxbrew/bin:$PATH
+
+eval "$(intercom-profile)"

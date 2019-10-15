@@ -28,6 +28,7 @@
   fpublish = "!git push -u origin $(git branch-name) --force-with-lease"
   # Delete the remote version of the current branch
   unpublish = "!git push origin :$(git branch-name)"
+  amend = "!git commit --amend --no-edit"
 
   yoink = "!git reset --hard origin/$(git branch-name)"
   yeet = "!git add . && git commit --amend --no-edit && git push --force-with-lease"
