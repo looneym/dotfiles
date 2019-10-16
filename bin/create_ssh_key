@@ -1,3 +1,11 @@
 #!/usr/bin/env bash
 
 ssh-keygen -f ~/.ssh/id_rsa -t rsa -b 4096 -C "looneymicheal@gmail.com"
+echo
+echo
+echo
+echo "ssh key generated, public key:"
+echo
+cat ~/.ssh/id_rsa.pub
+echo
+echo "You must add the above public key to your GitHub ssh keys"
