@@ -62,7 +62,5 @@
 	name = Micheal Looney
 	email = micheal.looney@intercom.io
 
-[url "git@github.com:"]
-   insteadOf = "https://github.com/"
 [hub]
 	reportCrash = never
