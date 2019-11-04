@@ -1,2 +1,9 @@
 #!/usr/bin/env bash
-echo "home"
+
+source ~/dotfiles/conf/local.conf
+
+if [ -z $PRETTYHOST ]; then
+  hostname
+else
+  echo $PRETTYHOST
+fi
