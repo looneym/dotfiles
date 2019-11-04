@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# Install packages defined in Brewfile
+
+brew bundle

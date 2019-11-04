@@ -1,7 +1,0 @@
-#!/usr/bin/env ruby
-
-
-path = ARGV[0] 
-file_name = File.basename(path, (File.extname(path))) 
-`echo #{file_name} #{path} >> ~/.NERDTreeBookmarks`
-puts "Added new bookmark 📖"

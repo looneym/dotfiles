@@ -1,0 +1,70 @@
+#!/bin/bash
+
+alias te='vim ~/.transient'
+alias ae='vim ~/dotfiles/dotfiles/aliases'
+alias ze='vim ~/.zshrc'
+alias zs='source ~/.zshrc && echo Succesfully reloaded .zshrc! 🎉'
+alias eip='curl ipinfo.io/ip'
+alias iip="ipconfig getifaddr en0"
+alias hax="tmux new -A -s HAX"
+alias ops='eval $(op signin intercom)'
+
+gsha() {
+  glo $1 | peco | awk '{print $1}'
+}
+
+man() {
+  vim -c "runtime! ftplugin/man.vim" -c "let g:ft_man_open_mode = 'tab'" -c ":Man $1" -c "tabonly"
+}
+
+mksc() {
+  script=$1
+  touch $script
+  echo "#!/usr/bin/env bash" >$script
+  chmod +x $script
+}
+
+function c() {
+  kill -9 $(jobs -p | cut -d " " -f 4)
+  clear
+}
+
+function git() { hub $@; }
+alias gb="git branch"
+alias gca="git commit --amend --no-edit"
+alias gcae="git commit --amend"
+alias gco="git checkout"
+alias glo="git log --oneline"
+alias gs="git status"
+alias gc="git commit"
+alias gz="git stash && gco master && git pull"
+
+pro() {
+  hub pull-request --no-edit
+}
+
+nuke_docker() {
+  # Delete all containers
+  docker stop $(docker ps -a -q)
+  docker rm -f $(docker ps -a -q)
+  # Delete all images
+  docker rmi $(docker images -q)
+  docker system prune
+}
+
+docker_shell() {
+  if [[ -z "$1" ]]; then
+    shell="/bin/bash"
+  else
+    shell="/bin/$1"
+  fi
+
+  artifact=$(echo "containers\nimages" | peco)
+
+  if [[ "$artifact" == "containers" ]]; then
+    docker exec -it $(docker ps | peco | awk '{print $1}') "$shell"
+  elif [[ "$artifact" == "images" ]]; then
+    docker run -it $(docker images | peco | awk '{print $3}') "$shell"
+  fi
+}
+alias ds="docker_shell"

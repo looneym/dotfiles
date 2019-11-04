@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+if [ -z $PRETTYHOST ]; then
+  hostname
+else
+  echo $PRETTYHOST
+fi
