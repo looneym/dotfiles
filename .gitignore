@@ -6,5 +6,5 @@ tags.temp
 .transient
 tags
 zsh-syntax-highlighting
-.conf
-!.conf/example.conf
+conf
+!conf/example.conf
