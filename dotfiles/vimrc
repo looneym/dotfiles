@@ -17,7 +17,6 @@ Plug 'MattesGroeger/vim-bookmarks'
 Plug 'chriskempson/tomorrow-theme', {'rtp': 'vim/'}
 
 Plug 'christoomey/vim-tmux-navigator'
-Plug 'ctrlpvim/ctrlp.vim'
 Plug 'fatih/vim-go'
   let g:go_fmt_command = "goimports"
 
@@ -29,27 +28,9 @@ Plug 'junegunn/fzf.vim'
   map <Leader>s :Ag<CR>
 
 Plug 'lfv89/vim-interestingwords'
-Plug 'majutsushi/tagbar'
-Plug 'mileszs/ack.vim'
 Plug 'roxma/vim-tmux-clipboard'
-Plug 'vimwiki/vimwiki'
-let g:vimwiki_list = [{'path': '~/vimwiki/',
-                      \ 'syntax': 'markdown', 'ext': '.md'}]
-
 Plug 'scrooloose/nerdtree'
   map <Leader>n :NERDTreeToggle<CR>
-
-Plug 'thiagoalessio/rainbow_levels.vim'
-  map <leader>l :RainbowLevelsToggle<cr>
-  let g:rainbow_levels = [
-      \{'ctermfg': 68,  'guifg': '#6699cc'},
-      \{'ctermfg': 203, 'guifg': '#ec5f67'},
-      \{'ctermfg': 221, 'guifg': '#fac863'},
-      \{'ctermfg': 114, 'guifg': '#99c794'},
-      \{'ctermfg': 176, 'guifg': '#c594c5'},
-      \{'ctermfg': 209, 'guifg': '#f99157'},
-      \{'ctermfg': 73,  'guifg': '#62b3b2'},
-      \{'ctermfg': 137, 'guifg': '#ab7967'}]
 
 Plug 'tmux-plugins/vim-tmux-focus-events'
 Plug 'tpope/vim-commentary'
@@ -86,14 +67,6 @@ Plug 'mhinz/vim-signify'
 Plug 'ruanyl/vim-gh-line'
 let g:gh_open_command = 'fn() { echo "$@" | nc 10.0.0.2 8377; }; fn '
 
-
-
-Plug 'ycm-core/YouCompleteMe', { 'dir': '~/.vim/plugged/YouCompleteMe', 'do': 'python3  install.py --clang-completer' }
-  let g:ycm_autoclose_preview_window_after_completion=1
-
-Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
-  let g:mkdp_port = '1337'
-Plug 'ferrine/md-img-paste.vim'
 
 call plug#end()
 
@@ -249,7 +222,5 @@ nnoremap <leader>w :w<CR>
 nnoremap <leader>q :q<CR>
 nnoremap <leader>Q :q!<CR>
 nnoremap bg :sus<CR>
-nnoremap <leader>h :let @/='\<<C-R>=expand("<cword>")<CR>\>'<CR>:set hls<CR>
-nnoremap <leader>H :nohl<CR>
 
 

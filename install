@@ -1,0 +1,44 @@
+#! /usr/bin/env bash
+
+usage(){
+	echo "install OPTIONS"
+	echo
+	echo "Options:"
+	echo "  -p PLATFORM (required) "
+}
+
+
+parse_options(){
+while getopts ":p:" opt; do
+  case ${opt} in
+    p )
+	    if [ $OPTARG == "mac" ]; then
+	    export PLATFORM="mac"
+    elif [ $OPTARG == "al2" ]; then
+	    export PLATFORM="al2"
+    fi
+
+
+	    ;;
+    \? )
+   usage
+   exit
+      ;;
+  esac
+done
+
+if [ -z "$PLATFORM" ]; then
+       echo "Invalid option for platform"
+       usage
+       exit
+fi
+}
+
+run_modules(){
+	lib/install/brew
+	lib/install/zsh
+	lib/install/symlinks
+}
+
+parse_options $@
+run_modules

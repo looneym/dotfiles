@@ -1,0 +1,9 @@
+#! /usr/bin/env bash
+
+run_modules(){
+	lib/uninstall/symlinks
+}
+
+run_modules
+
+
