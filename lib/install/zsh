@@ -8,13 +8,13 @@ install_oh_my_zsh() {
 }
 
 install_syntax_highlighting() {
-  if [ ! -d "$ZSH_CUSTOM/.zsh-syntax-highlighting" ]; then
+  if [ ! -d "$ZSH_CUSTOM/zsh-syntax-highlighting" ]; then
     git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $ZSH_CUSTOM/zsh-syntax-highlighting
   fi
 }
 
 install_autosuggestions() {
-  if [ ! -d "$ZSH_CUSTOM/.zsh-autosuggestions" ]; then
+  if [ ! -d "$ZSH_CUSTOM/zsh-autosuggestions" ]; then
     git clone https://github.com/zsh-users/zsh-autosuggestions.git $ZSH_CUSTOM/zsh-autosuggestions
   fi
 }

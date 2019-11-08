@@ -20,4 +20,4 @@ source $ZSH_CUSTOM/zsh-autosuggestions/zsh-autosuggestions.zsh
 source ~/.transient
 source ~/.aliases
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-[ -f ~/.linuxbrew/bin/brew  ] && source ~/.linuxbrew/bin/brew
+[ -f ~/.linuxbrew/bin/brew  ] && eval $(~/.linuxbrew/bin/brew shellenv) 
