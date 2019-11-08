@@ -84,7 +84,7 @@ Plug 'w0rp/ale'
 Plug 'wincent/vim-clipper'
 Plug 'mhinz/vim-signify'
 Plug 'ruanyl/vim-gh-line'
-let g:gh_open_command = 'fn() { echo "$@" | nc -c localhost 8377; }; fn '
+let g:gh_open_command = 'fn() { echo "$@" | clippersend; }; fn '
 
 
 
@@ -193,7 +193,7 @@ highlight DiffText   cterm=bold ctermfg=10 ctermbg=88 gui=none guifg=bg guibg=Re
 " some plugins cannot be configured inside the Plug block
 
 colorscheme Tomorrow-Night-Eighties
-call clipper#set_invocation('nc -c localhost 8377')
+call clipper#set_invocation('clippersend')
 
 """""""""""""""""""""""""""""""""""""""
 "

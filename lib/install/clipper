@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+sudo echo "127.0.0.1 clipperhost" >>/etc/hosts
+sudo echo "10.0.0.2 clipperhost" >>/etc/hosts

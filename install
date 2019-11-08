@@ -39,6 +39,7 @@ run_modules() {
   lib/install/brew
   lib/install/zsh
   lib/install/symlinks
+  lib/install/clipper
 }
 
 parse_options $@
