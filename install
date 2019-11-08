@@ -9,9 +9,10 @@ usage() {
   echo "  -l Lite install: do not install brew or any packages "
 }
 
-export LITE_INSTALL="false"
 parse_options() {
-  while getopts ":l:" opt; do
+
+      export LITE_INSTALL="false"
+  while getopts ":l" opt; do
     case ${opt} in
     l)
       export LITE_INSTALL="true"
@@ -36,13 +37,12 @@ detect_platform() {
 
 run_modules() {
   lib/install/base_packages
-  lib/install/brew
   lib/install/zsh
   lib/install/symlinks
   lib/install/clipper
   lib/install/create_local_conf
 }
 
-parse_options $@
+parse_options "$@"
 detect_platform
 run_modules
