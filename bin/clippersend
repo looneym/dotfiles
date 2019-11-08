@@ -1,9 +1,11 @@
 #!/usr/bin/env bash
 
+source source_local_conf
+
 if [ nc --version | grep -is gnu ]; then
-  command="nc -c clipperhost 8377"
+  command="nc -c $CLIPPPERHOST 8377"
 else
-  command="nc clipperhost 8377"
+  command="nc $CLIPPERHOST 8377"
 fi
 
 $command

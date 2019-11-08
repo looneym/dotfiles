@@ -40,7 +40,6 @@ run_modules() {
   lib/install/brew
   lib/install/zsh
   lib/install/symlinks
-  lib/install/clipper
   lib/install/create_local_conf
 }
 

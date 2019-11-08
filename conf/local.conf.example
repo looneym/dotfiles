@@ -2,3 +2,5 @@
 # Uncomment any values you wish to set
 
 # export PRETTYHOST="foo"
+# export CLIPPERHOST="10.0.0.2"
+# export CLIPPERHOST="localhost"
