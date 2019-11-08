@@ -20,7 +20,6 @@ install_brew_packages() {
     "ctags"
     "entr"
     "hub"
-    "openssh"
     "shfmt"
     "tmux"
     "vim"
