@@ -40,6 +40,7 @@ run_modules() {
   lib/install/zsh
   lib/install/symlinks
   lib/install/clipper
+  lib/install/create_local_conf
 }
 
 parse_options $@

@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+[ -f ~/dotfiles/conf/local.conf ] && source ~/dotfiles/conf/local.conf

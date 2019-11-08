@@ -1,1 +1,4 @@
-export PRETTYHOST="foo"
+#!/usr/bin/env bash
+# Uncomment any values you wish to set
+
+# export PRETTYHOST="foo"
