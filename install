@@ -11,9 +11,9 @@ usage() {
 
 export LITE_INSTALL="false"
 parse_options() {
-  while getopts ":b:" opt; do
+  while getopts ":l:" opt; do
     case ${opt} in
-    p)
+    l)
       export LITE_INSTALL="true"
       ;;
     \?)

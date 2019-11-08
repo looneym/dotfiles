@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 
 arch_base_packages() {
-  pacman --noconfirm -S base-devel
+  sudo pacman --noconfirm -S base-devel
 }
 
 al2_base_packages() {
-  yum groupinstall -y 'Development Tools'
+  sudo yum groupinstall -y 'Development Tools'
   sudo yum install -y curl file git
 }
 
