@@ -11,7 +11,7 @@ usage() {
 
 parse_options() {
 
-      export LITE_INSTALL="false"
+  export LITE_INSTALL="false"
   while getopts ":l" opt; do
     case ${opt} in
     l)
@@ -37,6 +37,7 @@ detect_platform() {
 
 run_modules() {
   lib/install/base_packages
+  lib/install/brew
   lib/install/zsh
   lib/install/symlinks
   lib/install/clipper
