@@ -1,13 +1,13 @@
 #! /usr/bin/env bash
 
-remove_symlinks(){
-  paths="zshrc vimrc tmux.conf gitconfig gitignore.global aliases git_template"       
+remove_symlinks() {
+  paths="zshrc vimrc tmux.conf gitconfig gitignore.global aliases git_template"
   for path in $paths; do
-      rm -rf ~/.$path
+    rm -rf ~/.$path
   done
-  
+
   rm -rf ~/.transient || echo
-  rm -rf ~/.oh-my-zsh/ || echo 
+  rm -rf ~/.oh-my-zsh/ || echo
   rm -rf ~/.vim || echo
 }
 

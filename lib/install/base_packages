@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+arch_base_packages() {
+  pacman --noconfirm -S base-devel
+}
+
+al2_base_packages() {
+  yum groupinstall -y 'Development Tools'
+  sudo yum install -y curl file git
+}
+
+if [ "$LITE_INSTALL" == "true" ]; then
+  echo "lite install only"
+  exit 0
+else
+  if [ "$PLATFORM" == "arch" ]; then
+    arch_base_packages
+  elif [ "$PLATFORM" == "al2" ]; then
+    al2_base_packages
+  fi
+fi
