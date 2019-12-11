@@ -4,7 +4,7 @@ name: default
 
 steps:
 - name: build
-  image: alpine
+  image: amazonlinux
   commands:
-  - echo "hello world"
+  - install
 
