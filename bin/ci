@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+drone build last --branch $(git branch-name) $(git remote get-url origin | grep -Pzo ":(\S*).git" | sed "s/://g" | sed "s/.git//g")
