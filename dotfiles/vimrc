@@ -88,12 +88,15 @@ let g:gh_open_command = 'fn() { echo "$@" | clippersend; }; fn '
 
 
 
-Plug 'ycm-core/YouCompleteMe', { 'dir': '~/.vim/plugged/YouCompleteMe', 'do': 'python3  install.py --clang-completer' }
-  let g:ycm_autoclose_preview_window_after_completion=1
-
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
   let g:mkdp_port = '1337'
 Plug 'ferrine/md-img-paste.vim'
+
+Plug 'Shougo/deoplete.nvim', { 'do': 'pip3 install --user pynvim' } 
+Plug 'roxma/nvim-yarp'
+Plug 'roxma/vim-hug-neovim-rpc'
+let g:deoplete#enable_at_startup = 1
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 
 call plug#end()
 

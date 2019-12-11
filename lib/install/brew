@@ -20,6 +20,7 @@ install_brew_packages() {
     "ctags"
     "entr"
     "hub"
+    "python"
     "shfmt"
     "tmux"
     "vim"
