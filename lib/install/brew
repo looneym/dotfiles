@@ -13,11 +13,16 @@ install_homebrew() {
   fi
 }
 
+taps() {
+  brew tap drone/drone
+}
+
 install_brew_packages() {
   declare -a brew_packages=(
     "ag"
     "cmake"
     "ctags"
+    "drone"
     "entr"
     "hub"
     "python"
@@ -34,5 +39,6 @@ if [ "$LITE_INSTALL" == "true" ]; then
   exit 0
 else
   install_homebrew
+  taps
   install_brew_packages
 fi
