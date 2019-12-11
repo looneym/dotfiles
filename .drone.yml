@@ -2,9 +2,14 @@ kind: pipeline
 type: docker
 name: default
 
+workspace:
+  base: /root
+  path: /dotfiles
+
 steps:
 - name: build
   image: amazonlinux
   commands:
-  - ./install
+  - yum install -y sudo which  
+  - ./install -p al2
 

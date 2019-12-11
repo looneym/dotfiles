@@ -64,11 +64,9 @@ alias gz!="git stash && gco master && git pull"
 # TODO: move this to gitconfig
 alias noop="git checkout master && git pull && git checkout -b ml/noop && git commit --allow-empty -m \"noop\""
 
-
 pro() {
   hub pull-request --no-edit
 }
-
 
 prls() {
   hub pr list -h $(git branch-name)
@@ -93,13 +91,19 @@ ds() {
     shell="/bin/$1"
   fi
 
-  artifact=$(echo "containers\nimages" | peco)
+  artifact=$(echo "containers\nimages" | fzf)
 
   if [[ "$artifact" == "containers" ]]; then
-    docker exec -it $(docker ps | peco | awk '{print $1}') "$shell"
+    command="docker exec -it $(docker ps | fzf | awk '{print $1}') \"$shell\""
   elif [[ "$artifact" == "images" ]]; then
-    docker run -it $(docker images | peco | awk '{print $3}') "$shell"
+    command="docker run -it $(docker images | fzf | awk '{print $3}') \"$shell\""
   fi
+
+  echo "Executing this command to give you a shell:"
+  echo
+  echo "$command"
+  echo
+  sh -c $command
 }
 
 did() {
@@ -146,4 +150,3 @@ function role() {
   account=$(jq -r 'keys[]' ~/.aws/accounts | fzf)
   assume-role $account team-cloud $(botp)
 }
-

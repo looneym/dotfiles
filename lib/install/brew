@@ -19,16 +19,16 @@ taps() {
 
 install_brew_packages() {
   declare -a brew_packages=(
-    "ag"
-    "cmake"
-    "ctags"
-    "drone"
-    "entr"
-    "hub"
-    "python"
-    "shfmt"
-    "tmux"
-    "vim"
+    # "ag"
+    # "cmake"
+    # "ctags"
+    # "drone"
+    # "entr"
+    # "hub"
+    # "python"
+    # "shfmt"
+    # "tmux"
+    # "vim"
     "zsh"
   )
   brew install "${brew_packages[@]}"
