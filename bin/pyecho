@@ -2,7 +2,7 @@
 # Reflects the requests from HTTP methods GET, POST, PUT, and DELETE
 # Written by Nathan Hamiel (2010)
 
-from BaseHTTPServer import HTTPServer, BaseHTTPRequestHandler
+from http.server import HTTPServer, BaseHTTPRequestHandler
 from optparse import OptionParser
 
 class RequestHandler(BaseHTTPRequestHandler):
@@ -12,36 +12,39 @@ class RequestHandler(BaseHTTPRequestHandler):
         request_path = self.path
         
         print("\n----- Request Start ----->\n")
-        print(request_path)
-        print(self.headers)
+        print("Request path:", request_path)
+        print("Request headers:", self.headers)
         print("<----- Request End -----\n")
         
         self.send_response(200)
         self.send_header("Set-Cookie", "foo=bar")
+        self.end_headers()
         
     def do_POST(self):
         
         request_path = self.path
         
         print("\n----- Request Start ----->\n")
-        print(request_path)
+        print("Request path:", request_path)
         
         request_headers = self.headers
-        content_length = request_headers.getheaders('content-length')
-        length = int(content_length[0]) if content_length else 0
+        content_length = request_headers.get('Content-Length')
+        length = int(content_length) if content_length else 0
         
-        print(request_headers)
-        print(self.rfile.read(length))
+        print("Content Length:", length)
+        print("Request headers:", request_headers)
+        print("Request payload:", self.rfile.read(length))
         print("<----- Request End -----\n")
         
         self.send_response(200)
+        self.end_headers()
     
     do_PUT = do_POST
     do_DELETE = do_GET
         
 def main():
     port = 1337
-    print('Listening on localhost:%s' % port)
+    print('Listening on 0.0.0.0:%s' % port)
     server = HTTPServer(('', port), RequestHandler)
     server.serve_forever()
 
@@ -54,3 +57,4 @@ if __name__ == "__main__":
     (options, args) = parser.parse_args()
     
     main()
+

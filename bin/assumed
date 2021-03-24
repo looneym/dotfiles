@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# exit 0 if you have assumed-role
+
+aws sts get-caller-identity | jq .Arn | grep -q assumed

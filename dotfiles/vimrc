@@ -16,9 +16,31 @@ call plug#begin('~/.vim/plugged')
 Plug 'MattesGroeger/vim-bookmarks'
 Plug 'chriskempson/tomorrow-theme', {'rtp': 'vim/'}
 
+Plug 'majutsushi/tagbar'
+Plug 'codegourmet/ruby-yank-fqn'
+
+nmap <Leader>l :call YankFQN()<CR>
+nmap <Leader>y :Clip<CR>
+
+Plug 'drmingdrmer/vim-toggle-quickfix'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'fatih/vim-go'
-  let g:go_fmt_command = "goimports"
+let g:go_fmt_command = "goimports"
+let g:go_highlight_types = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_function_calls = 1
+let g:go_metalinter_enabled = ['vet', 'golint', 'errcheck']
+let g:go_metalinter_autosave = 1
+let g:go_metalinter_autosave_enabled = ['vet', 'golint']
+  map <Leader>g :GoBuild<CR>
+  map <C-u> :cnext<CR>
+  " map <C-i> :cprevious<CR>
+  map <C-y> :cclose<CR>
+  map <C-q> <Plug>window:quickfix:toggle
+  let g:go_list_type = "quickfix"
+  autocmd BufReadPost quickfix nnoremap <buffer> <CR> <CR>
+  
 
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
@@ -39,6 +61,10 @@ Plug 'tpope/vim-fugitive'
   map <leader>G :Git! 
   map <Leader>gs :Gstatus<CR>
   map <Leader>gy :Git! yeet
+  map <Leader>gl :Glog<CR>
+  map <Leader>gb :Git checkout -b ml/
+  map <Leader>gp :!git publish ; hub pull-request --no-edit <CR>
+  map <Leader>gP :!git publish ; hub pull-request --no-edit ; ~/dotfiles/bin/prfeed <CR>
 
 Plug 'tpope/vim-rails'
 Plug 'tpope/vim-tbone'
@@ -66,7 +92,24 @@ Plug 'wincent/vim-clipper'
 Plug 'mhinz/vim-signify'
 Plug 'ruanyl/vim-gh-line'
 let g:gh_open_command = 'fn() { echo "$@" | nc 10.0.0.2 8377; }; fn '
+" Plug 'ackyshake/VimCompletesMe'
+" Plug 'ycm-core/YouCompleteMe'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+let g:coc_global_extensions = ['coc-solargraph']
+nmap gd <Plug>(coc-definition)
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+Plug 'hashivim/vim-terraform'
+let g:terraform_fmt_on_save=1
 
 call plug#end()
 
@@ -92,6 +135,8 @@ function! s:getVisualSelection()
 endfunction
 nnoremap <silent><leader>f viw<Esc>:Ag! <C-R>=<SID>getVisualSelection()<CR><CR>
 vnoremap <silent><leader>f <Esc>:Ag! <C-R>=<SID>getVisualSelection()<CR><CR>
+
+noremap <leader>c Gygg
 
 " git stuff
 map <Leader>glo :Runcmd git log --oneline --reverse <CR>
@@ -187,7 +232,7 @@ set splitright
 :nnoremap <Leader>r :e!<CR>
 
 " copy current file path to clipboard
-:nmap cp :let @+ = expand("%:p")<CR>
+:nmap cp :let @" = expand("%:p")<CR>
 
 " Quickly edit/reload this configuration file
 nnoremap ged :e $MYVIMRC<CR>
@@ -224,3 +269,7 @@ nnoremap <leader>Q :q!<CR>
 nnoremap bg :sus<CR>
 
 
+set ignorecase
+set smartcase
+
+let g:ale_set_highlights = 0 " Disable highligting

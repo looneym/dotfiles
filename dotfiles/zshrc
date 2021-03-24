@@ -4,7 +4,6 @@
 #
 ################################################################################
 
-export PATH=$PATH:~/dotfiles/bin
 export ZSH=~/.oh-my-zsh
 export ZSH_CUSTOM=$ZSH/custom/plugins
 export EDITOR=vim
@@ -13,6 +12,7 @@ export LC_CTYPE=en_US.UTF-8
 export LANG=en_US.UTF-8
 export TERM=screen-256color
 export KEYTIMEOUT=1
+export PRETTYUSER="looneym"
 
 source $ZSH/oh-my-zsh.sh
 ZSH_THEME="looneym"
@@ -26,4 +26,5 @@ source $ZSH_CUSTOM/zsh-autosuggestions/zsh-autosuggestions.zsh
 source $(which assume-role)
 source ~/.transient
 source ~/.aliases
-
+eval "$(intercom-profile)"
+export PATH=~/dotfiles/bin:$PATH

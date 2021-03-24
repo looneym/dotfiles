@@ -43,11 +43,11 @@ prompt_end() {
 
 # Context: user@hostname (who am I and where am I)
 prompt_context() {
-  local user=`whoami`
+  # local user=`$PRETTYUSER`
   local host=`prettyhost`
 
   if [[ "$user" != "$DEFAULT_USER" || -n "$SSH_CONNECTION" ]]; then
-    prompt_segment 2 $PRIMARY_FG " %(!.%{%F{yellow}%}.)$user@$host "
+    prompt_segment 2 $PRIMARY_FG " %(!.%{%F{yellow}%}.)$PRETTYUSER@$host "
   fi
 }
 
