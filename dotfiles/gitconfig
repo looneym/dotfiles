@@ -1,0 +1,23 @@
+[init]
+	templatedir = ~/.git_template
+[core]
+	excludesfile = ~/.gitignore.global
+[rebase]
+    autostash = true
+[diff]
+  tool = vimdiff
+[alias]
+  branch-name = "!git rev-parse --abbrev-ref HEAD"
+  publish = "!git push -u origin $(git branch-name)"
+  fpublish = "!git push -u origin $(git branch-name) --force-with-lease"
+  unpublish = "!git push origin :$(git branch-name)"
+  yoink = "!git reset --hard origin/$(git branch-name)"
+  yeet = "!git add . && git commit --amend --no-edit && git push --force-with-lease"
+  amend = "!git commit --amend --no-edit"
+  delete-merged-branches = "!git co master && git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d"
+  noop = "!git branch -D ml/noop && git checkout master && git pull && git checkout -b ml/noop && git commit --allow-empty -m \"noop\""
+[user]
+	name = Micheal Looney
+	email = micheal.looney@intercom.io
+[hub]
+	reportCrash = never

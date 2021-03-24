@@ -1,0 +1,9 @@
+venv/
+.tmuxinator.yml
+tags
+tags.lock
+tags.temp
+scratch
+package-lock.json
+.idea
+scratchpad*

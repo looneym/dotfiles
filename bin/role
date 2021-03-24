@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+account=$(jq -r 'keys[]' ~/.aws/accounts | fzf)
+assume-role $account team-cloud $(botp)

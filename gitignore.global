@@ -1,9 +1,0 @@
-venv/
-.tmuxinator.yml
-tags
-tags.lock
-tags.temp
-scratch
-looneym
-package-lock.json
-.idea
