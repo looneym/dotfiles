@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-source ~/dotfiles/conf/local.conf
-
 if [ -z $PRETTYHOST ]; then
   hostname
 else

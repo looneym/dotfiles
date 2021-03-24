@@ -1,6 +1,3 @@
-[user]
-	; name = Micheal Looney
-	; email = micheal.looney@intercom.io
 [init]
 	templatedir = ~/.git_template
 [core]
@@ -10,57 +7,17 @@
 [diff]
   tool = vimdiff
 [alias]
-  ################################################################################
-  #
-  # Working with branches
-  #
-  ################################################################################
-  pr="!hub pull-request"
-  # Get the current branch name (not so useful in itself, but used in
-  # other aliases)
   branch-name = "!git rev-parse --abbrev-ref HEAD"
-  # Push the current branch to the remote "origin", and set it to track
-  # the upstream branch
-  ; publish = "!git push -u origin $(git branch-name) && hub pull-request | grep -P '^https.*pull\/(\d*)' | post-pr"
   publish = "!git push -u origin $(git branch-name)"
-  ; publish = "!git push -u origin $(git branch-name) && hub pull-request -m \"$(cat .git/COMMIT_EDITMSG | grep -v '^#')\" | post-pr"
-  # Do the same as publish, but force push, as long as nobody else has made changes to the branch
   fpublish = "!git push -u origin $(git branch-name) --force-with-lease"
-  # Delete the remote version of the current branch
   unpublish = "!git push origin :$(git branch-name)"
-  amend = "!git commit --amend --no-edit"
-
   yoink = "!git reset --hard origin/$(git branch-name)"
   yeet = "!git add . && git commit --amend --no-edit && git push --force-with-lease"
-  # Delete a branch and recreate it from master — useful if you have, say,
-  # a development branch and a master branch and they could conceivably go
-  # out of sync
-  recreate = "!f() { [[ -n $@ ]] && git checkout \"$@\" && git unpublish && git checkout master && git branch -D \"$@\" && git checkout -b \"$@\" && git publish; }; f"
-
-  vim ="!/home/linuxbrew/.linuxbrew/bin/vim -c 'let NERDTreeShowHidden=1' -c ':NERDTreeToggle' -c ':Gstatus' -c ':NERDTreeToggle' -c 'only'"
-
-  ################################################################################
-  #
-  # Working with files
-  #
-  ################################################################################
-
-  # Unstage any files that have been added to the staging area
-  unstage = reset HEAD
-  # Show changes that have been staged
-  diffc = diff --cached
-
-  # Checkout our version of a file and add it
-  ours = "!f() { git checkout --ours $@ && git add $@; }; f"
-  # Checkout their version of a file and add it
-  theirs = "!f() { git checkout --theirs $@ && git add $@; }; f"
-
-  # Delete any branches that have been merged into master
-  # See also: https://gist.github.com/robmiller/5133264
+  amend = "!git commit --amend --no-edit"
   delete-merged-branches = "!git co master && git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d"
+  noop = "!git branch -D ml/noop && git checkout master && git pull && git checkout -b ml/noop && git commit --allow-empty -m \"noop\""
 [user]
 	name = Micheal Looney
 	email = micheal.looney@intercom.io
-
 [hub]
 	reportCrash = never

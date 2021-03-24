@@ -1,82 +1,48 @@
 #!/bin/bash
 
-# meta
-ar() {
-  echo "Reloading .zshrc"
-  source ~/.zshrc
-}
-
-ae() {
-  vim ~/.aliases
-  ar
-}
-
-aa() {
-  a="alias $1=\"$(lc)\""
-  echo $a >>~/.aliases
-  echo "Added new alias: $a"
-  ar
-}
-
-role() {
-  account=$(jq -r 'keys[]' ~/.aws/accounts | fzf)
-  assume-role $account team-cloud $(botp)
-}
-
-sa() {
-  script_name=$1
-  script_path=$HOME/dotfiles/bin/$script_name
-  script_contents=$(lc)
-
-  echo "#!/usr/bin/env bash" >$script_path
-  chmod +x $script_path
-  echo $script_contents >>$script_path
-
-  echo "Added new script: $script_name"
-  echo
-  cat $script_path
-}
-
-alias lc="history | tail -n 1 | cut -c 8-"
-
 alias te='vim ~/.transient'
+alias ae='vim ~/dotfiles/dotfiles/aliases'
 alias ze='vim ~/.zshrc'
-alias se="vim ~/.ssh/config"
 alias zs='source ~/.zshrc && echo Succesfully reloaded .zshrc! 🎉'
-
-# What's my ip?
 alias eip='curl ipinfo.io/ip'
 alias iip="ipconfig getifaddr en0"
-
-alias x="chmod +x"
-alias ops='eval $(op signin intercom)'
 alias hax="tmux new -A -s HAX"
+alias ops='eval $(op signin intercom)'
 
-# Git
+gsha() {
+  glo $1 | peco | awk '{print $1}'
+}
+
+man() {
+  vim -c "runtime! ftplugin/man.vim" -c "let g:ft_man_open_mode = 'tab'" -c ":Man $1" -c "tabonly"
+}
+
+mksc() {
+  script=$1
+  touch $script
+  echo "#!/usr/bin/env bash" >$script
+  chmod +x $script
+}
+
+function c() {
+  kill -9 $(jobs -p | cut -d " " -f 4)
+  clear
+}
+
 function git() { hub $@; }
 alias gb="git branch"
 alias gca="git commit --amend --no-edit"
 alias gcae="git commit --amend"
 alias gco="git checkout"
-alias gd="git difftool"
-alias gdm="echo 'Comparing changes against origin/master' &&git difftool origin/master"
-alias gfa="git fetch --all"
 alias glo="git log --oneline"
 alias gs="git status"
 alias gc="git commit"
 alias gz="git stash && gco master && git pull"
-# TODO: move this to gitconfig
-alias noop="git checkout master && git pull && git checkout -b ml/noop && git commit --allow-empty -m \"noop\""
 
 pro() {
   hub pull-request --no-edit
 }
 
-prls() {
-  hub pr list -h $(git branch-name)
-}
-
-# Docker
 nuke_docker() {
   # Delete all containers
   docker stop $(docker ps -a -q)
@@ -86,9 +52,7 @@ nuke_docker() {
   docker system prune
 }
 
-ds() {
-  # TODO
-  # - override entrypoint?
+docker_shell() {
   if [[ -z "$1" ]]; then
     shell="/bin/bash"
   else
@@ -103,77 +67,4 @@ ds() {
     docker run -it $(docker images | peco | awk '{print $3}') "$shell"
   fi
 }
-
-did() {
-  artifact=$(echo "containers\nimages" | peco)
-  if [[ "$artifact" == "containers" ]]; then
-    docker ps | peco | awk '{print $1}'
-  elif [[ "$artifact" == "images" ]]; then
-    docker images | peco | awk '{print $1}'
-  fi
-}
-
-# Clipboard
-clip() {
-  echo $1 | nc localhost 8377
-}
-
-tc() {
-  input=""
-  while read line; do input+="$line \n"; done
-  echo $input | tmux load-buffer -
-  echo $input | nc localhost 8377
-}
-
-gsha() {
-  glo $1 | peco | awk '{print $1}'
-}
-
-man() {
-  vim -c "runtime! ftplugin/man.vim" -c "let g:ft_man_open_mode = 'tab'" -c ":Man $1" -c "tabonly"
-}
-
-v() {
-  vim -c ':NERDTreeToggle'
-}
-
-mkscript() {
-  script=$1
-  touch $script
-  echo "#!/usr/bin/env bash" >$script
-  chmod +x $script
-}
-
-function c() {
-  kill -9 $(jobs -p | cut -d " " -f 4)
-  clear
-}
-
-function hax() {
-  tmux new -A -s hax
-}
-
-function assume_role_from_sso() {
-  account_id=$1
-  role=$2
-
-  ROLE_SESSION_ARGS=(--role-arn arn:aws:iam::"${account_id}":role/"${role}")
-  ROLE_SESSION_ARGS+=(--external-id "${account_id}")
-  ROLE_SESSION_ARGS+=(--role-session-name "$INTERCOM_USER")
-  ROLE_SESSION=$(aws sts assume-role "${ROLE_SESSION_ARGS[@]}" || echo "fail")
-
-  if [ "$ROLE_SESSION" = "fail" ]; then
-    echo_out "Failed to export session envars."
-  else
-    AWS_ACCESS_KEY_ID=$(echo "$ROLE_SESSION" | jq -r .Credentials.AccessKeyId)
-    AWS_SECRET_ACCESS_KEY=$(echo "$ROLE_SESSION" | jq -r .Credentials.SecretAccessKey)
-    AWS_SESSION_TOKEN=$(echo "$ROLE_SESSION" | jq -r .Credentials.SessionToken)
-    export AWS_ACCESS_KEY_ID
-    export AWS_SECRET_ACCESS_KEY
-    export AWS_SESSION_TOKEN
-    export AWS_SECURITY_TOKEN=$AWS_SESSION_TOKEN
-    export AWS_ACCOUNT_ID="$account_id"
-    export AWS_ACCOUNT_ROLE="$role"
-    echo_out "Success! IAM session envars are exported."
-  fi
-}
+alias ds="docker_shell"

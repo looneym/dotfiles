@@ -1,0 +1,15 @@
+#! /usr/bin/env bash
+# Link dotfiles in home directory
+
+create_symlinks() {
+  files="zshrc vimrc tmux.conf gitconfig gitignore.global aliases git_template"
+  for file in $files; do
+    echo "Creating symlink to $file in home directory."
+    ln -sf ~/dotfiles/dotfiles/$file ~/.$file
+  done
+
+  touch ~/.transient
+  ln -sf ~/dotfiles/themes/looneym.zsh-theme ~/.oh-my-zsh/themes/looneym.zsh-theme
+}
+
+create_symlinks

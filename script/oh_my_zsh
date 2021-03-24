@@ -1,21 +1,22 @@
 #! /usr/bin/env bash
+# Install oh_my_zsh and plugins
 
-install_oh_my_zsh(){
+install_oh_my_zsh() {
   if [ ! -d "$OH_MY_ZSH" ]; then
     curl -Lo /tmp/install.sh https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh
     sh /tmp/install.sh --unattended
   fi
 }
 
-install_syntax_highlighting(){
+install_syntax_highlighting() {
   if [ ! -d "$ZSH_CUSTOM/.zsh-syntax-highlighting" ]; then
-    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git  $ZSH_CUSTOM/zsh-syntax-highlighting
+    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $ZSH_CUSTOM/zsh-syntax-highlighting
   fi
 }
 
-install_autosuggestions(){
+install_autosuggestions() {
   if [ ! -d "$ZSH_CUSTOM/.zsh-autosuggestions" ]; then
-    git clone https://github.com/zsh-users/zsh-autosuggestions.git  $ZSH_CUSTOM/zsh-autosuggestions
+    git clone https://github.com/zsh-users/zsh-autosuggestions.git $ZSH_CUSTOM/zsh-autosuggestions
   fi
 }
 

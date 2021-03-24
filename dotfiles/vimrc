@@ -1,8 +1,6 @@
 """""""""""""""""""""""""""""""""""""""
 "
-"
-"      INSTALL PLUGINS
-"
+"      Install Plugins
 "
 """""""""""""""""""""""""""""""""""""""
 
@@ -11,20 +9,50 @@ if empty(glob('~/.vim/autoload/plug.vim'))
     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
- 
+
 call plug#begin('~/.vim/plugged')
-Plug 'MattesGroeger/vim-bookmarks'
-Plug 'chriskempson/tomorrow-theme', {'rtp': 'vim/'}
+  Plug 'chriskempson/tomorrow-theme', {'rtp': 'vim/'}
+  Plug 'vim-airline/vim-airline'
+  Plug 'vim-airline/vim-airline-themes'
+  Plug 'drmingdrmer/vim-toggle-quickfix'
+  Plug 'christoomey/vim-tmux-navigator'
+  Plug 'fatih/vim-go'
+  Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+  Plug 'junegunn/fzf.vim'
+  Plug 'lfv89/vim-interestingwords'
+  Plug 'roxma/vim-tmux-clipboard'
+  Plug 'scrooloose/nerdtree'
+  Plug 'tmux-plugins/vim-tmux-focus-events'
+  Plug 'tpope/vim-commentary'
+  Plug 'tpope/vim-fugitive'
+  Plug 'tpope/vim-rails'
+  Plug 'w0rp/ale'
+  Plug 'wincent/vim-clipper'
+  Plug 'mhinz/vim-signify'
+  Plug 'ruanyl/vim-gh-line'
+  Plug 'ycm-core/YouCompleteMe'
+  Plug 'hashivim/vim-terraform'
+call plug#end()
 
-Plug 'majutsushi/tagbar'
-Plug 'codegourmet/ruby-yank-fqn'
+"""""""""""""""""""""""""""""""""""""""
+"
+"      Configure Plugins
+"
+"""""""""""""""""""""""""""""""""""""""
 
-nmap <Leader>l :call YankFQN()<CR>
+" theme/colorscheme
+colorscheme Tomorrow-Night-Eighties
+let g:airline_theme='tomorrow'
+let g:airline_section_b = ''
+let g:airline_section_y = ''
+let g:airline_section_error = ''
+let g:airline_section_warning = ''
+
+" clipper
+call clipper#set_invocation('nc 10.0.0.2 8377')
 nmap <Leader>y :Clip<CR>
 
-Plug 'drmingdrmer/vim-toggle-quickfix'
-Plug 'christoomey/vim-tmux-navigator'
-Plug 'fatih/vim-go'
+" vim-go
 let g:go_fmt_command = "goimports"
 let g:go_highlight_types = 1
 let g:go_highlight_fields = 1
@@ -33,95 +61,15 @@ let g:go_highlight_function_calls = 1
 let g:go_metalinter_enabled = ['vet', 'golint', 'errcheck']
 let g:go_metalinter_autosave = 1
 let g:go_metalinter_autosave_enabled = ['vet', 'golint']
-  map <Leader>g :GoBuild<CR>
-  map <C-u> :cnext<CR>
-  " map <C-i> :cprevious<CR>
-  map <C-y> :cclose<CR>
-  map <C-q> <Plug>window:quickfix:toggle
-  let g:go_list_type = "quickfix"
-  autocmd BufReadPost quickfix nnoremap <buffer> <CR> <CR>
-  
+map <C-g> :GoBuild<CR>
+let g:go_list_type = "quickfix"
+let g:go_list_height = 10
 
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
-  let $FZF_DEFAULT_COMMAND='find . '
-  nnoremap <Leader>o : Files <ENTER>
-  nnoremap <Leader>b : Buffers <ENTER>
-  map <Leader>s :Ag<CR>
-
-Plug 'lfv89/vim-interestingwords'
-Plug 'roxma/vim-tmux-clipboard'
-Plug 'scrooloose/nerdtree'
-  map <Leader>n :NERDTreeToggle<CR>
-
-Plug 'tmux-plugins/vim-tmux-focus-events'
-Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-fugitive'
-  noremap fu :h fugitive-mappings<cr>
-  map <leader>G :Git! 
-  map <Leader>gs :Gstatus<CR>
-  map <Leader>gy :Git! yeet
-  map <Leader>gl :Glog<CR>
-  map <Leader>gb :Git checkout -b ml/
-  map <Leader>gp :!git publish ; hub pull-request --no-edit <CR>
-  map <Leader>gP :!git publish ; hub pull-request --no-edit ; ~/dotfiles/bin/prfeed <CR>
-
-Plug 'tpope/vim-rails'
-Plug 'tpope/vim-tbone'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-  let g:airline_theme='tomorrow'
-  let g:airline_section_b = ''
-  let g:airline_section_y = ''
-  let g:airline_section_error = ''
-  let g:airline_section_warning = ''
-
-Plug 'w0rp/ale'
-  let g:ale_fixers = {
-    \   '*': ['remove_trailing_lines', 'trim_whitespace'],
-    \}
-  let  g:ale_fix_on_save=1
-  au BufWritePost * if getline(1) =~ "^#!.*sh" | let b:ale_fixers=  ['shfmt', 'remove_trailing_lines', 'trim_whitespace']
-  au BufWritePost * if getline(1) =~ "^#!.*sh" | let b:ale_fix_on_save=1 
-  map <leader>as :ALEFix shfmt<cr>
-  map <leader>as :ALEFix shfmt<cr>
-  let g:ale_echo_cursor = 1
-  let g:ale_set_highlights = 1
-
-Plug 'wincent/vim-clipper'
-Plug 'mhinz/vim-signify'
-Plug 'ruanyl/vim-gh-line'
-let g:gh_open_command = 'fn() { echo "$@" | nc 10.0.0.2 8377; }; fn '
-" Plug 'ackyshake/VimCompletesMe'
-" Plug 'ycm-core/YouCompleteMe'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-let g:coc_global_extensions = ['coc-solargraph']
-nmap gd <Plug>(coc-definition)
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
-
-Plug 'hashivim/vim-terraform'
-let g:terraform_fmt_on_save=1
-
-call plug#end()
-
-""""""""""""""""""""""""""""""""""""""
-"
-"
-"      CUSTOM FUNCTIONS AND COMMANDS
-"
-"
-"""""""""""""""""""""""""""""""""""""""
- 
-" search a visual selection with ag
+" vim-fzf
+let $FZF_DEFAULT_COMMAND='find . '
+nnoremap <Leader>o : Files <ENTER>
+nnoremap <Leader>b : Buffers <ENTER>
+map <Leader>s :Ag<CR>
 function! s:getVisualSelection()
     let [line_start, column_start] = getpos("'<")[1:2]
     let [line_end, column_end] = getpos("'>")[1:2]
@@ -136,140 +84,65 @@ endfunction
 nnoremap <silent><leader>f viw<Esc>:Ag! <C-R>=<SID>getVisualSelection()<CR><CR>
 vnoremap <silent><leader>f <Esc>:Ag! <C-R>=<SID>getVisualSelection()<CR><CR>
 
-noremap <leader>c Gygg
+" vim-fugitive
+noremap fu :h fugitive-maps<cr>
+map <Leader>gs :Gstatus<CR>
+map <Leader>gl :Glog<CR>
 
-" git stuff
-map <Leader>glo :Runcmd git log --oneline --reverse <CR>
-
-" sort a visual selection, split by word
-vnoremap <Leader>sort d:execute 'normal i' . join(sort(split(getreg('"'))), ' ')<CR>
-
-""""""""""""""""""""""""""""""""""""""
-"
-"
-"      NAVIGATION
-"
-"
-"""""""""""""""""""""""""""""""""""""""
-
-" Go to tab by number
-noremap <leader>1 1gt
-noremap <leader>2 2gt
-noremap <leader>3 3gt
-noremap <leader>4 4gt
-noremap <leader>5 5gt
-noremap <leader>6 6gt
-noremap <leader>7 7gt
-noremap <leader>8 8gt
-noremap <leader>9 9gt
-noremap <leader>0 :tablast<cr>
-
-" disable arrow keys to be extra 1337
-noremap <Up> <Nop>
-noremap <Down> <Nop>
-noremap <Left> <Nop>
-noremap <Right> <Nop>
-
-" split panes easily
-:nnoremap <Leader>v :vnew<CR>
-:nnoremap <Leader>h :new<CR>
-
-" new tab
-:nnoremap <Leader>t :tabnew<CR>
-:nnoremap <Leader>T :tabclose!<CR>
-
-" Switch to previous buffer
-noremap <Leader><Leader> :b#<CR>
-
-" Allow movement with ctrl and hjlk in insert mode
-inoremap <C-k> <Up>
-inoremap <C-j> <Down>
-inoremap <C-l> <Right>
-inoremap <C-h> <Left>
-
-"""""""""""""""""""""""""""""""""""""""
-"
-"
-"      GIT DIFF COLORS
-"
-"
-"""""""""""""""""""""""""""""""""""""""
-
-highlight DiffAdd    cterm=bold ctermfg=10 ctermbg=17 gui=none guifg=bg guibg=Red
-highlight DiffDelete cterm=bold ctermfg=10 ctermbg=17 gui=none guifg=bg guibg=Red
-highlight DiffChange cterm=bold ctermfg=10 ctermbg=17 gui=none guifg=bg guibg=Red
-highlight DiffText   cterm=bold ctermfg=10 ctermbg=88 gui=none guifg=bg guibg=Red
-
-
-"""""""""""""""""""""""""""""""""""""""
-"
-"
-"      PLUGIN CONFIGURATION
-"
-"
-"""""""""""""""""""""""""""""""""""""""
-" some plugins cannot be configured inside the Plug block
-
-colorscheme Tomorrow-Night-Eighties
-call clipper#set_invocation('nc 10.0.0.2 8377')
-
-"""""""""""""""""""""""""""""""""""""""
-"
-"
-"      MISC
-"
-"
-"""""""""""""""""""""""""""""""""""""""
-
-" delete without saving to clipboard
-nnoremap <leader>d "_d
-
-" Sane locations for new split panes
-set splitbelow
-set splitright
-
-" reload current file
-:nnoremap <Leader>r :e!<CR>
-
-" copy current file path to clipboard
-:nmap cp :let @" = expand("%:p")<CR>
-
-" Quickly edit/reload this configuration file
-nnoremap ged :e $MYVIMRC<CR>
-nnoremap gsr :so $MYVIMRC<CR>
-
-" clipboard register uses system clipboard
-set clipboard=unnamed
-
-" Tab key inserts two spaces and behaves like an indent in atom
-set tabstop=2 softtabstop=0 expandtab shiftwidth=2 smarttab
-" allow backspacing over everything in insert mode
-set backspace=indent,eol,start
-
-" allow cursor to be moved anywhere in insert
-set virtualedit=all
-
-" visual aids for programming
-set ruler
-set number
-" set number relativenumber
+" ale
+let g:ale_fixers = {
+  \   '*': ['remove_trailing_lines', 'trim_whitespace'],
+  \}
+let  g:ale_fix_on_save=1
+au BufWritePost * if getline(1) =~ "^#!.*sh" | let b:ale_fixers=  ['shfmt', 'remove_trailing_lines', 'trim_whitespace']
+au BufWritePost * if getline(1) =~ "^#!.*sh" | let b:ale_fix_on_save=1 
+map <leader>as :ALEFix shfmt<cr>
+map <leader>as :ALEFix shfmt<cr>
+let g:ale_echo_cursor = 1
+let g:ale_set_highlights = 0
 
 " misc
+let g:gh_open_command = 'fn() { echo "$@" | nc 10.0.0.2 8377; }; fn '
+let g:terraform_fmt_on_save=1
+map <C-q> <Plug>window:quickfix:toggle
+map <Leader>n :NERDTreeToggle<CR>
+
+"""""""""""""""""""""""""""""""""""""""
+"
+"      Configure Vim
+"
+"""""""""""""""""""""""""""""""""""""""
+
+syntax enable
+filetype plugin indent on
+
+set clipboard=unnamed
+set tabstop=2 softtabstop=0 expandtab shiftwidth=2 smarttab
+set backspace=indent,eol,start
+set virtualedit=all
+set ruler
+set number
 set nocompatible
 set mouse=a
 set noswapfile
-syntax enable
-inoremap jk <Esc>
-filetype plugin indent on
 set pastetoggle=<F2>
-nnoremap <space> :
-nnoremap <leader>w :w<CR>
-nnoremap <leader>q :q<CR>
-nnoremap <leader>Q :q!<CR>
-nnoremap bg :sus<CR>
-
-
+set splitbelow
+set splitright
 set ignorecase
 set smartcase
 
-let g:ale_set_highlights = 0 " Disable highligting
+nnoremap <Leader>v :vnew<CR>
+nnoremap <Leader>h :new<CR>
+nnoremap <leader>w :w<CR>
+nnoremap <leader>q :q<CR>
+nnoremap <leader>Q :q!<CR>
+noremap <Leader><Leader> :b#<CR>
+noremap <leader>c Gygg
+nnoremap <space> :
+nnoremap bg :sus<CR>
+inoremap jk <Esc>
+nnoremap <Leader>r :e!<CR>
+nnoremap ged :e $MYVIMRC<CR>
+nnoremap gsr :so $MYVIMRC<CR>
+nmap cp :let @" = expand("%:p")<CR>
+
