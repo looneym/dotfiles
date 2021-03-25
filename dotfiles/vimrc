@@ -12,26 +12,26 @@ endif
 
 call plug#begin('~/.vim/plugged')
   Plug 'chriskempson/tomorrow-theme', {'rtp': 'vim/'}
-  Plug 'vim-airline/vim-airline'
-  Plug 'vim-airline/vim-airline-themes'
-  Plug 'drmingdrmer/vim-toggle-quickfix'
   Plug 'christoomey/vim-tmux-navigator'
+  Plug 'drmingdrmer/vim-toggle-quickfix'
   Plug 'fatih/vim-go'
+  Plug 'hashivim/vim-terraform'
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
   Plug 'junegunn/fzf.vim'
   Plug 'lfv89/vim-interestingwords'
+  Plug 'mhinz/vim-signify'
   Plug 'roxma/vim-tmux-clipboard'
+  Plug 'ruanyl/vim-gh-line'
   Plug 'scrooloose/nerdtree'
   Plug 'tmux-plugins/vim-tmux-focus-events'
   Plug 'tpope/vim-commentary'
   Plug 'tpope/vim-fugitive'
   Plug 'tpope/vim-rails'
+  Plug 'vim-airline/vim-airline'
+  Plug 'vim-airline/vim-airline-themes'
   Plug 'w0rp/ale'
   Plug 'wincent/vim-clipper'
-  Plug 'mhinz/vim-signify'
-  Plug 'ruanyl/vim-gh-line'
   Plug 'ycm-core/YouCompleteMe'
-  Plug 'hashivim/vim-terraform'
 call plug#end()
 
 """""""""""""""""""""""""""""""""""""""
