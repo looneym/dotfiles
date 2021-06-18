@@ -67,4 +67,19 @@ docker_shell() {
     docker run -it $(docker images | peco | awk '{print $3}') "$shell"
   fi
 }
+
+themes() {
+  alias | cut -d "=" -f 1 | grep base16 | grep -v light
+}
+
+ct() {
+  eval $(themes | fzf)
+  echo "Set theme $BASE16_THEME"
+}
+
+rt() {
+  eval $(themes | sort -R | tail -n 1)
+  echo "Set theme $BASE16_THEME"
+}
+
 alias ds="docker_shell"

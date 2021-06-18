@@ -10,8 +10,12 @@ export PRETTYUSER="looneym"
 
 source $ZSH/oh-my-zsh.sh
 ZSH_THEME="looneym"
+
+zstyle ':completion:*' list-prompt   ''
+zstyle ':completion:*' select-prompt ''
 plugins=(
   git
+  fzf-tab
 )
 autoload -U compinit && compinit
 source $ZSH_CUSTOM/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
@@ -20,5 +24,11 @@ source $ZSH_CUSTOM/zsh-autosuggestions/zsh-autosuggestions.zsh
 source $(which assume-role)
 source ~/.transient
 source ~/.aliases
-eval "$(intercom-profile)"
+# eval "$(intercom-profile)"
 export PATH=~/dotfiles/bin:$PATH
+
+
+BASE16_SHELL="$HOME/.config/base16-shell/"
+[ -n "$PS1" ] && \
+    [ -s "$BASE16_SHELL/profile_helper.sh" ] && \
+        eval "$("$BASE16_SHELL/profile_helper.sh")"
